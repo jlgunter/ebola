@@ -502,10 +502,7 @@ write.graph(g, "site23.graphml", format= "graphml")
 
 write.table(E23_new, "~/Desktop/Workstuff/E23.csv")
 
-#######################################################################
-
-##ideas for how to examine output from initial simulations (these simulations did not have the proper parameters set, used SI model)
-
+#############################################
 #data frame = site11
 #want columns 1, 2, 3, 5
 
@@ -619,10 +616,6 @@ plot(run19.whole, main="Seeds: Farmer org., Urban vendor, NGO", xlab="timestep",
 
 title("Site 11, Runs 18-19: Kaplan-Meier estimate with 95% confidence bounds", outer=TRUE)
 
-#################################################################################################
-
-##look at farmer to farmer contact
-
 
 #determining edge weights
 farmer11_contact = farmer11[farmer11$Hh_23e_2 != 0,]
@@ -699,53 +692,44 @@ farmertofarmer23 <- matrix(c(42, 35, 5, 6, 17, 0, 47, 25, 7, 6, 19, 1),ncol=6,by
 rownames(farmertofarmer23) <- c("Other farmers", "Neighbors/Friends")
 colnames(farmertofarmer23) <- c("Never", "Weekly", "Biweekly", "Monthly", "Seasonally", "Yearly")
 
-#this doesn't work, need to fix
-#barplot(as.matrix(farmertofarmer11), main="Contact between farmers", ylab= "Frequency of contact", beside=TRUE, col=rainbow(5))
+#this doesn't work but is a start
+barplot(as.matrix(farmertofarmer11), main="Contact between farmers", ylab= "Frequency of contact", beside=TRUE, col=rainbow(5))
 
 
 #####################################################################################
 
-#look at distributions of # of contacts compared to wealth (wealth index of 0-2 from personal characteristics/resource endowments dataset)
+reg_indicators = read.csv('/home/ndssl/Desktop/regression_indicators.csv', header=T)
+#find a way to match column 1 (unique ID) and 9 (wealth index) with hhrn (unique id) and number of contacts (through question E, frequency of contact) in whole_data
 
-#remove institutions, leave only farmers for one of the four sites
-E11_farmers = E11[!hhrn11 %in% c(11001:11015),]
+#look at site 11, question E (frequency of contact) to determine number of contacts
+#remove institutions, leave only farmers
+E11_farmers_tmp = E11[!hhrn11 %in% c(11001:11015),]
 
 #remove site number column and frequency of contact
-E11_farmers_melt<-data.frame(id=E11_farmers[,1], var=E11_farmers[,3])
+E11_farmers<-data.frame(id=E11_farmers_tmp[,1], var=E11_farmers_tmp[,3])
 
 #sort according to the id column
-order_E11_farmers_melt <- E11_farmers_melt[order(E11_farmers_melt$id),]
+order_E11_farmers<-E11_farmers[order(E11_farmers$id),]
 
-table(order_E11_farmers_melt$id)
+table(order_E11_farmers$id)
 #make a data frame with each unique id and its frequency. this is number of contacts
-num_contacts.E11 = as.data.frame(table(order_E11_farmers_melt$id))
-
-names(num_contacts.E11)[1] <- "ID"
-names(num_contacts.E11)[2] <- "Contacts"
-
-reg_indicators = read.csv('/home/ndssl/Desktop/regression_indicators.csv', header=T)
-#find a way to match column 1 and 9 with hhrn in whole_data
+num_contacts11 = as.data.frame(table(order_E11_farmers$id))
 
 #isolate site11 in regression indicators
-reg_ind11 = reg_indicators[reg_indicators$ID_number <= 111101,]
+reg_ind11_all = reg_indicators[reg_indicators$ID_number <= 111101,]
 
 #melt down to just unique id and wealth index
-reg_ind11_wealth = data.frame(reg_ind11$ID_number, reg_ind11$wealth_index)
+reg_ind11_wealth_tmp = data.frame(reg_ind11_all$ID_number, reg_ind11_all$wealth_index)
 
-new_reg_ind11_wealth = reg_ind11_wealth[c(-24,-30,-67,-85),]
-#create new dataframe of both sets of unique ids, wealth index, and number of contacts, eliminating those rows that only appear in wealth frame
+#remove the rows that don't exist in num_contacts11
+reg_ind11_wealth = reg_ind11_wealth_tmp[c(-24,-30,-67),]
 
-names(reg_ind11_wealth)[1] <- "ID"
-names(reg_ind11_wealth)[2] <- "Wealth"
-
-x <- cbind(num_contacts.E11, new_reg_ind11_wealth)
-
-xplot_tmp = data.frame(x$Contacts, x$Wealth)
-xplot = data.frame(xplot_tmp[order(xplot_tmp$x.Wealth),])
-
-library(ggplot2)
-
-qplot(xplot$x.Contacts, xplot$x.Wealth, data=xplot, xlab="Number of Contacts", ylab="Wealth Index", main="Distribution of # of Contacts to Wealth")
+#create new dataframe of both sets of unique ids, wealth index, and number of contacts
 
 
+
+#plot to look at distributions?
+par(mfrow=c(2,1))
+plot(num_contacts.E11)
+plot(reg_ind11_wealth)
 ####################################################################################
