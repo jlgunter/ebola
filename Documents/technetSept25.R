@@ -226,9 +226,9 @@ names(Tillage11)[2] <- "ID"
 ind_var11 = data.frame(reg_ind11$ID_number, reg_ind11$wealth_index, reg_ind11$female_household_Head, reg_ind11$Percent_energy_from_staples)
 
 names(ind_var11)[1] <- "ID"
-names(ind_var11)[2] <- "Wealth index"
-names(ind_var11)[3] <- "Female household head"
-names(ind_var11)[4] <- "% energy from staples"
+names(ind_var11)[2] <- "Wealth_index"
+names(ind_var11)[3] <- "Female_household_head"
+names(ind_var11)[4] <- "Energy_from_staples"
 
 
 
@@ -244,17 +244,18 @@ Tillrecode11 <- recode(Tillage11$beliefs, "c('1','2','3')='0'; else='1'")
 Tillbeliefs11 <- data.frame(Tillage11[,2], Tillrecode11)
 names(Tillbeliefs11)[1] <- "ID"
 
-#newTill11 <- cbind(Tillbeliefs11, ind_var11)
-compareIdentical(Tillbeliefs11$Till_id, ind_var11$ID, shorten,)
-comparison <- compare(Tillbeliefs11, ind_var11,allowAll=TRUE)
-
 Till_var11 = merge(Tillbeliefs11,ind_var11, by="ID")
 
 
 #########################################################################
 
 #regressions
-glm.out = glm(cbind(ID, Tillrecode11) ~ Wealth index, Female household head, % energy from staples, family=binomial(logit), data=Till_var11)
+#attach(Till_var11)
+
+Till_var11$Wealth_index <- factor(Till_var11$Wealth_index)
+Till_var11$Female_household_head <- factor(Till_var11$Female_household_head)
+
+glm.out <- glm(cbind(ID, Tillrecode11) ~ Wealth_index + Female_household_head + Energy_from_staples, data=Till_var11, family="binomial")
 
 
-Till_var11_reg <- glm(admit ~ gre + gpa + rank, data = mydata, family = "binomial")
+curve(predict(glm.out,data.frame(Tillrecode11=x),type="resp"),add=TRUE)
