@@ -230,11 +230,6 @@ names(ind_var11)[2] <- "Wealth_index"
 names(ind_var11)[3] <- "Female_household_head"
 names(ind_var11)[4] <- "Energy_from_staples"
 
-
-
-
-
-
 #change the values of tillage beliefs from the scale of 1-5 to 0-1
 library(epicalc)
 library(car)
@@ -255,7 +250,18 @@ Till_var11 = merge(Tillbeliefs11,ind_var11, by="ID")
 Till_var11$Wealth_index <- factor(Till_var11$Wealth_index)
 Till_var11$Female_household_head <- factor(Till_var11$Female_household_head)
 
-glm.out <- glm(cbind(ID, Tillrecode11) ~ Wealth_index + Female_household_head + Energy_from_staples, data=Till_var11, family="binomial")
+glm.out <- glm(Tillrecode11 ~ Wealth_index + Female_household_head + Energy_from_staples, data=Till_var11, family=binomial(link="logit"))
+glm.fit <- fitted(glm.out)
+#curve(predict(glm.fit,data.frame(Tillrecode11=x),type="resp"),add=TRUE)
+
+##############################################################################
+#try running the regression using all of the variables - use reg_ind11 instead of Till_var11
+
+names(reg_ind11)[1] <- "ID"
+Till_var11_big = merge(Tillbeliefs11,reg_ind11, by="ID")
 
 
-curve(predict(glm.out,data.frame(Tillrecode11=x),type="resp"),add=TRUE)
+Till_var11_big$wealth_index <- factor(Till_var11_big$wealth_index)
+
+glm.out_whole <- glm(Tillrecode11 ~ wealth_index + female_household_Head + Percent_energy_from_staples + Gender_respondent + Age_respondent + Educ_respondent + Importance_offarm_income + animal_traction + tractor + area_farmed + modern_cap_int_farming + mixed_farming + poor_health + access_to_credit, data=Till_var11_big, family=binomial(link="logit"))
+glm.fit <- fitted(glm.out_whole)
