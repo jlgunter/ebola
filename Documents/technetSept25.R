@@ -265,3 +265,5 @@ Till_var11_big$wealth_index <- factor(Till_var11_big$wealth_index)
 
 glm.out_whole <- glm(Tillrecode11 ~ wealth_index + female_household_Head + Percent_energy_from_staples + Gender_respondent + Age_respondent + Educ_respondent + Importance_offarm_income + animal_traction + tractor + area_farmed + modern_cap_int_farming + mixed_farming + poor_health + access_to_credit, data=Till_var11_big, family=binomial(link="logit"))
 glm.fit <- fitted(glm.out_whole)
+
+dbinom(5, size=88, prob=.4)
