@@ -267,3 +267,8 @@ glm.out_whole <- glm(Tillrecode11 ~ wealth_index + female_household_Head + Perce
 glm.fit <- fitted(glm.out_whole)
 
 dbinom(5, size=88, prob=.4)
+
+############################################################################
+#appended farmer-to-farmer pairs
+
+E23_whole = read.csv('/home/ndssl/newpairs1004.csv', header=T)

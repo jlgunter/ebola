@@ -156,7 +156,7 @@ IDs = whole_data[1:4]
 
 Combined = cbind(IDs, chief, farmer, neighbor, mkt_vendor, urban_vendor, agro_vendor, teacher, minister, xtens_agent, ngo, vet, gvt_parastatals, ag_researcher, ag_rep, tractor_owner, leader_farm, leader_women, leader_youth, politician, other)
 describe(Combined)
-#look at R graphics package under the packages tab to experiment with different graphs. Some do not work with Combined due to size
+
 
 Tororo = whole_data[whole_data$Site==11,]
 Kapchorwa = whole_data[whole_data$Site==12,]
@@ -283,24 +283,25 @@ table(Tillage11_tmp$Tororo_beliefs.Hh_24rank_15, Tillage11_tmp$Tororo_beliefs.wh
 library(igraph)
 library(reshape)
 
+##site 11 (Tororo)
+
 questionE = data.frame(Combined[c(grep("Hh_23e_*", colnames(Combined)))], whole_data$hhrn, whole_data$Site) #create data frame with question e variables and identifying variables
 E_melted11 = questionE[questionE$whole_data.Site == 11,]
 E_melted11 = melt.data.frame(E_melted11, id.vars=c('whole_data.hhrn', 'whole_data.Site'))
-E_melted11 = data.frame(E_melted11$hhrn, E_melted11$variable, E_melted11$value)
 
-colnames(E_melted11)[which(E_melted11[1,]>0)]
+##eliminate responses of "Never"
+E11 = E_melted11[E_melted11$value != "Never",]
 
-E11 = E_melted11[E_melted11.value != "Never",]
-
+names(E11)[1]<-"ID"
+names(E11)[2]<-"Site"
 
 #need to add edge weights
-#E(g)$E_melted11.value
 #selects all edges from g graph (3rd column of E_melted11)
 #need to weight these values, weakly being the most heavily weighted and yearly being the least heavily weighted
 
 attach(E_melted11)
-E11.value<-rep(E11[,3])  #E11.value is what will be used to assign numerical values to the frequency values (Monthly, etc)
-E11.recode<-rep(0, 458)
+E11.value<-rep(E11[,4])  #E11.value is what will be used to assign numerical values to the frequency values (Monthly, etc)
+E11.recode<-rep(0, 437)
 
 #assign numerical values (edge weights) to frequencies
 E11.recode[E11.value=="Yearly"]<-1
@@ -309,8 +310,8 @@ E11.recode[E11.value=="Monthly"]<-3
 E11.recode[E11.value=="Biweekly"]<-4
 E11.recode[E11.value=="Weekly"]<-5
 
-E11.var<-rep(E11[,2])
-E11.contacts<-rep(0, 458)
+E11.var<-rep(E11[,3])
+E11.contacts<-rep(0, 437)
 
 E11.contacts[E11.var=="Hh_23e_1"]<-"Chief"
 E11.contacts[E11.var=="Hh_23e_2"]<-"Farmers"
@@ -335,10 +336,19 @@ E11.contacts[E11.var=="Hh_23e_20"]<-"Other"
 
 E11_weighted<-data.frame(id=E11[,1],var=E11.contacts,value=E11.recode) # create a new dataframe that includes edge weights
 
-E(g)$weight <- E(g)$value
+write.table(E11_weighted, "~/Documents/E11.csv")
+
+##read in new farmer to farmer pairs created from python script
+
+E11_newpairs = read.csv('/home/ndssl/newpairsE11.csv', header=T)
+
 
 g = graph.data.frame(E11_weighted)
+
+
 write.graph(g, "site11.graphml", format= "graphml")
+
+
 
 #site 12
 
@@ -462,6 +472,12 @@ E23 = E_melted23[E_melted23.value != "Never",]
 E23.value<-rep(E23[,3])  #E11.value is what will be used to assign numerical values to the frequency values (Monthly, etc)
 E23.recode<-rep(0, 909)
 
+E23.value("Yearly")<-1
+E23.value=="Seasonally"<-2
+E23.value=="Monthly"]<-3
+E23.value=="Biweekly"]<-4
+E23.value=="Weekly"]<-5
+
 #assign numerical values (edge weights) to frequencies
 E23.recode[E23.value=="Yearly"]<-1
 E23.recode[E23.value=="Seasonally"]<-2
@@ -493,9 +509,8 @@ E23.contacts[E23.var=="Hh_23e_18"]<-"Youth org. leader"
 E23.contacts[E23.var=="Hh_23e_19"]<-"Local politican"
 E23.contacts[E23.var=="Hh_23e_20"]<-"Other"
 
-E23_new<-data.frame(id=E23[,1],var=E23.contacts,value=E23.recode) # create a new dataframe that includes edge weights
+E23_weighted<-data.frame(id=E23[,1],var=E23.contacts,value=E23.recode)
 
-E(g)$weight <- E(g)$value
 
 g = graph.data.frame(E23_new)
 write.graph(g, "site23.graphml", format= "graphml")
