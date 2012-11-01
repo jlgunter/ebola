@@ -340,10 +340,14 @@ write.table(E11_weighted, "~/Documents/E11.csv")
 
 ##read in new farmer to farmer pairs created from python script
 
-E11_newpairs = read.csv('/home/ndssl/newpairsE11.csv', header=T)
+E11_newpairs_tmp = read.csv('/home/ndssl/newpairsE11.csv', header=T)
+E11_newpairs = data.frame(E11_newpairs_tmp$id, E11_newpairs_tmp$var, E11_newpairs_tmp$value)
 
+names(E11_newpairs)[1] <- "ID"
+names(E11_newpairs)[2] <- "var"
+names(E11_newpairs)[3] <- "value"
 
-g = graph.data.frame(E11_weighted)
+g = graph.data.frame(E11_newpairs)
 
 
 write.graph(g, "site11.graphml", format= "graphml")
@@ -355,18 +359,20 @@ write.graph(g, "site11.graphml", format= "graphml")
 questionE = data.frame(Combined[c(grep("Hh_23e_*", colnames(Combined)))], whole_data$hhrn, whole_data$Site) #create data frame with question e variables and identifying variables
 E_melted12 = questionE[questionE$whole_data.Site == 12,]
 E_melted12 = melt.data.frame(E_melted12, id.vars=c('whole_data.hhrn', 'whole_data.Site'))
-E_melted12 = data.frame(E_melted12$whole_data.hhrn, E_melted12$variable, E_melted12$value)
 
-colnames(E_melted12)[which(E_melted12[1,]>0)]
-attach(E_melted12)
-E12 = E_melted12[E_melted12.value != "Never",]
+##eliminate responses of "Never"
+E12 = E_melted12[E_melted12$value != "Never",]
+
+names(E12)[1]<-"ID"
+names(E12)[2]<-"Site"
 
 #need to add edge weights
-E(g)$E_melted12.value #selects all edges from g graph (3rd column of E_melted11)
+#selects all edges from g graph (3rd column of E_melted11)
 #need to weight these values, weakly being the most heavily weighted and yearly being the least heavily weighted
 
-E12.value<-rep(E12[,3])  #E11.value is what will be used to assign numerical values to the frequency values (Monthly, etc)
-E12.recode<-rep(0, 929)
+attach(E_melted12)
+E12.value<-rep(E12[,4])  #E11.value is what will be used to assign numerical values to the frequency values (Monthly, etc)
+E12.recode<-rep(0, 437)
 
 #assign numerical values (edge weights) to frequencies
 E12.recode[E12.value=="Yearly"]<-1
@@ -375,8 +381,8 @@ E12.recode[E12.value=="Monthly"]<-3
 E12.recode[E12.value=="Biweekly"]<-4
 E12.recode[E12.value=="Weekly"]<-5
 
-E12.var<-rep(E12[,2])
-E12.contacts<-rep(0, 929)
+E12.var<-rep(E12[,3])
+E12.contacts<-rep(0, 437)
 
 E12.contacts[E12.var=="Hh_23e_1"]<-"Chief"
 E12.contacts[E12.var=="Hh_23e_2"]<-"Farmers"
@@ -401,9 +407,20 @@ E12.contacts[E12.var=="Hh_23e_20"]<-"Other"
 
 E12_weighted<-data.frame(id=E12[,1],var=E12.contacts,value=E12.recode) # create a new dataframe that includes edge weights
 
-E(g)$weight <- E(g)$value
+write.table(E12_weighted, "~/Documents/E12.csv")
 
-g = graph.data.frame(E12_weighted)
+##read in new farmer to farmer pairs created from python script
+
+E12_newpairs_tmp = read.csv('/home/ndssl/newpairsE12.csv', header=T)
+E12_newpairs = data.frame(E12_newpairs_tmp$id, E12_newpairs_tmp$var, E12_newpairs_tmp$value)
+
+names(E12_newpairs)[1] <- "ID"
+names(E12_newpairs)[2] <- "var"
+names(E12_newpairs)[3] <- "value"
+
+g = graph.data.frame(E12_newpairs)
+
+
 write.graph(g, "site12.graphml", format= "graphml")
 
 #site13
@@ -411,14 +428,20 @@ write.graph(g, "site12.graphml", format= "graphml")
 questionE = data.frame(Combined[c(grep("Hh_23e_*", colnames(Combined)))], whole_data$hhrn, whole_data$Site) #create data frame with question e variables and identifying variables
 E_melted13 = questionE[questionE$whole_data.Site == 13,]
 E_melted13 = melt.data.frame(E_melted13, id.vars=c('whole_data.hhrn', 'whole_data.Site'))
-E_melted13 = data.frame(E_melted13$whole_data.hhrn, E_melted13$variable, E_melted13$value)
 
-colnames(E_melted13)[which(E_melted13[1,]>0)]
+##eliminate responses of "Never"
+E13 = E_melted13[E_melted13$value != "Never",]
+
+names(E13)[1]<-"ID"
+names(E13)[2]<-"Site"
+
+#need to add edge weights
+#selects all edges from g graph (3rd column of E_melted11)
+#need to weight these values, weakly being the most heavily weighted and yearly being the least heavily weighted
+
 attach(E_melted13)
-E13 = E_melted13[E_melted13.value != "Never",]
-
-E13.value<-rep(E13[,3])  #E11.value is what will be used to assign numerical values to the frequency values (Monthly, etc)
-E13.recode<-rep(0, 914)
+E13.value<-rep(E13[,4])  #E11.value is what will be used to assign numerical values to the frequency values (Monthly, etc)
+E13.recode<-rep(0, 437)
 
 #assign numerical values (edge weights) to frequencies
 E13.recode[E13.value=="Yearly"]<-1
@@ -427,8 +450,8 @@ E13.recode[E13.value=="Monthly"]<-3
 E13.recode[E13.value=="Biweekly"]<-4
 E13.recode[E13.value=="Weekly"]<-5
 
-E13.var<-rep(E13[,2])
-E13.contacts<-rep(0, 914)
+E13.var<-rep(E13[,3])
+E13.contacts<-rep(0, 437)
 
 E13.contacts[E13.var=="Hh_23e_1"]<-"Chief"
 E13.contacts[E13.var=="Hh_23e_2"]<-"Farmers"
@@ -453,9 +476,19 @@ E13.contacts[E13.var=="Hh_23e_20"]<-"Other"
 
 E13_weighted<-data.frame(id=E13[,1],var=E13.contacts,value=E13.recode) # create a new dataframe that includes edge weights
 
-E(g)$weight <- E(g)$value
+write.table(E13_weighted, "~/Documents/E13.csv")
 
-g = graph.data.frame(E13_weighted)
+##read in new farmer to farmer pairs created from python script
+
+E13_newpairs_tmp = read.csv('/home/ndssl/newpairsE13.csv', header=T)
+E13_newpairs = data.frame(E13_newpairs_tmp$id, E13_newpairs_tmp$var, E13_newpairs_tmp$value)
+
+names(E13_newpairs)[1] <- "ID"
+names(E13_newpairs)[2] <- "var"
+names(E13_newpairs)[3] <- "value"
+
+g = graph.data.frame(E13_newpairs)
+
 write.graph(g, "site13.graphml", format= "graphml")
 
 #site 23
@@ -463,20 +496,20 @@ write.graph(g, "site13.graphml", format= "graphml")
 questionE = data.frame(Combined[c(grep("Hh_23e_*", colnames(Combined)))], whole_data$hhrn, whole_data$Site) #create data frame with question e variables and identifying variables
 E_melted23 = questionE[questionE$whole_data.Site == 23,]
 E_melted23 = melt.data.frame(E_melted23, id.vars=c('whole_data.hhrn', 'whole_data.Site'))
-E_melted23 = data.frame(E_melted23$whole_data.hhrn, E_melted23$variable, E_melted23$value)
 
-colnames(E_melted23)[which(E_melted23[1,]>0)]
+##eliminate responses of "Never"
+E23 = E_melted23[E_melted23$value != "Never",]
+
+names(E23)[1]<-"ID"
+names(E23)[2]<-"Site"
+
+#need to add edge weights
+#selects all edges from g graph (3rd column of E_melted11)
+#need to weight these values, weakly being the most heavily weighted and yearly being the least heavily weighted
+
 attach(E_melted23)
-E23 = E_melted23[E_melted23.value != "Never",]
-
-E23.value<-rep(E23[,3])  #E11.value is what will be used to assign numerical values to the frequency values (Monthly, etc)
-E23.recode<-rep(0, 909)
-
-E23.value("Yearly")<-1
-E23.value=="Seasonally"<-2
-E23.value=="Monthly"]<-3
-E23.value=="Biweekly"]<-4
-E23.value=="Weekly"]<-5
+E23.value<-rep(E23[,4])  #E11.value is what will be used to assign numerical values to the frequency values (Monthly, etc)
+E23.recode<-rep(0, 437)
 
 #assign numerical values (edge weights) to frequencies
 E23.recode[E23.value=="Yearly"]<-1
@@ -485,8 +518,8 @@ E23.recode[E23.value=="Monthly"]<-3
 E23.recode[E23.value=="Biweekly"]<-4
 E23.recode[E23.value=="Weekly"]<-5
 
-E23.var<-rep(E23[,2])
-E23.contacts<-rep(0, 909)
+E23.var<-rep(E23[,3])
+E23.contacts<-rep(0, 437)
 
 E23.contacts[E23.var=="Hh_23e_1"]<-"Chief"
 E23.contacts[E23.var=="Hh_23e_2"]<-"Farmers"
@@ -509,13 +542,23 @@ E23.contacts[E23.var=="Hh_23e_18"]<-"Youth org. leader"
 E23.contacts[E23.var=="Hh_23e_19"]<-"Local politican"
 E23.contacts[E23.var=="Hh_23e_20"]<-"Other"
 
-E23_weighted<-data.frame(id=E23[,1],var=E23.contacts,value=E23.recode)
+E23_weighted<-data.frame(id=E23[,1],var=E23.contacts,value=E23.recode) # create a new dataframe that includes edge weights
 
+write.table(E23_weighted, "~/Documents/E23.csv")
 
-g = graph.data.frame(E23_new)
+##read in new farmer to farmer pairs created from python script
+
+E23_newpairs_tmp= read.csv('/home/ndssl/newpairsE23.csv', header=T)
+E23_newpairs = data.frame(E23_newpairs_tmp$id, E23_newpairs_tmp$var, E23_newpairs_tmp$value)
+
+names(E23_newpairs)[1] <- "ID"
+names(E23_newpairs)[2] <- "var"
+names(E23_newpairs)[3] <- "value"
+
+g = graph.data.frame(E23_newpairs)
+
 write.graph(g, "site23.graphml", format= "graphml")
 
-write.table(E23_new, "~/Desktop/Workstuff/E23.csv")
 
 #######################################################################
 
@@ -764,3 +807,93 @@ qplot(xplot$x.Contacts, xplot$x.Wealth, data=xplot, xlab="Number of Contacts", y
 
 
 ####################################################################################
+
+
+#isolate tillage beliefs question from technet data
+
+tillage_beliefs = whole_data[,187]
+tillage_beliefs = factor(tillage_beliefs, levels = c(0:4, -99)) #labels = c("Strongly disagree", "Disagree", "Neutral", "Agree", "Strongly agree", NA))
+
+Tororo_tillage_tmp = Tororo[,187]
+Kapchorwa_tillage_tmp = Kapchorwa[,187]
+Bungoma_tillage_tmp = Bungoma[,187]
+Kitale_tillage_tmp = Kitale[,187]
+
+Tororo_tillage = factor(Tororo_tillage_tmp, levels = c(0:4, -99)) #labels = c("Strongly disagree", "Disagree", "Neutral", "Agree", "Strongly agree", NA))
+Kapchorwa_tillage = factor(Kapchorwa_tillage_tmp, levels = c(0:4, -99)) #labels = c("Strongly disagree", "Disagree", "Neutral", "Agree", "Strongly agree", NA))
+Bungoma_tillage = factor(Bungoma_tillage_tmp, levels = c(0:4, -99)) #labels = c("Strongly disagree", "Disagree", "Neutral", "Agree", "Strongly agree", NA))
+Kitale_tillage = factor(Kitale_tillage_tmp, levels = c(0:4, -99)) #labels = c("Strongly disagree", "Disagree", "Neutral", "Agree", "Strongly agree", NA))
+
+Question24 = whole_data[173:192]
+Combined_beliefs = cbind(IDs, Question24)
+
+beliefs = data.frame(Combined_beliefs[c(grep("Hh_24rank_*", colnames(Combined_beliefs)))], whole_data$hhrn, whole_data$agnttype, whole_data$Site)
+Tororo_beliefs = beliefs[beliefs$whole_data.Site == 11,]
+Tillage11_tmp = data.frame(Tororo_beliefs$Hh_24rank_15, Tororo_beliefs$whole_data.hhrn, Tororo_beliefs$whole_data.agnttype)
+Tillage11_tmp2 = data.frame(Tillage11_tmp$Tororo_beliefs.Hh_24rank_15, Tillage11_tmp$Tororo_beliefs.whole_data.hhrn)
+
+#eliminate -99 values
+Tillage11 = Tillage11_tmp2[c(-(1:15), -34, -51, -74, -85, -99),]
+
+#rename columns
+names(Tillage11)[1] <- "beliefs"
+names(Tillage11)[2] <- "ID"
+
+#######################################################################
+
+#reshape personal characteristics data to include ind. vars: wealth index, female household head, and % energy from staples
+
+#reg_ind11 = reg_indicators[reg_indicators$ID_number <= 111101,]
+#but add back institutions
+
+#melt down to just unique id and wealth index
+ind_var11 = data.frame(reg_ind11$ID_number, reg_ind11$wealth_index, reg_ind11$female_household_Head, reg_ind11$Percent_energy_from_staples)
+
+names(ind_var11)[1] <- "ID"
+names(ind_var11)[2] <- "Wealth_index"
+names(ind_var11)[3] <- "Female_household_head"
+names(ind_var11)[4] <- "Energy_from_staples"
+
+#change the values of tillage beliefs from the scale of 1-5 to 0-1
+library(epicalc)
+library(car)
+
+.data = Tillage11
+Tillrecode11 <- recode(Tillage11$beliefs, "c('1','2','3')='0'; else='1'")
+Tillbeliefs11 <- data.frame(Tillage11[,2], Tillrecode11)
+names(Tillbeliefs11)[1] <- "ID"
+
+Till_var11 = merge(Tillbeliefs11,ind_var11, by="ID")
+
+
+#########################################################################
+
+#regressions
+#attach(Till_var11)
+
+Till_var11$Wealth_index <- factor(Till_var11$Wealth_index)
+Till_var11$Female_household_head <- factor(Till_var11$Female_household_head)
+
+glm.out <- glm(Tillrecode11 ~ Wealth_index + Female_household_head + Energy_from_staples, data=Till_var11, family=binomial(link="logit"))
+glm.fit <- fitted(glm.out)
+#curve(predict(glm.fit,data.frame(Tillrecode11=x),type="resp"),add=TRUE)
+
+##############################################################################
+#try running the regression using all of the variables - use reg_ind11 instead of Till_var11
+
+names(reg_ind11)[1] <- "ID"
+Till_var11_big = merge(Tillbeliefs11,reg_ind11, by="ID")
+
+
+Till_var11_big$wealth_index <- factor(Till_var11_big$wealth_index)
+
+glm.out_whole <- glm(Tillrecode11 ~ wealth_index + female_household_Head + Percent_energy_from_staples + Gender_respondent + Age_respondent + Educ_respondent + Importance_offarm_income + animal_traction + tractor + area_farmed + modern_cap_int_farming + mixed_farming + poor_health + access_to_credit, data=Till_var11_big, family=binomial(link="logit"))
+glm.fit <- fitted(glm.out_whole)
+
+dbinom(5, size=88, prob=.4)
+
+
+####################################################################################
+#multinomial distribution
+
+library(MASS)
