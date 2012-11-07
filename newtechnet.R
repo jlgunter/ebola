@@ -290,7 +290,14 @@ E_melted11 = questionE[questionE$whole_data.Site == 11,]
 E_melted11 = melt.data.frame(E_melted11, id.vars=c('whole_data.hhrn', 'whole_data.Site'))
 
 ##eliminate responses of "Never"
-E11 = E_melted11[E_melted11$value != "Never",]
+E11_tmp = E_melted11[E_melted11$value != "Never",]
+
+#create variable of just the institutions, to then use to add edges to the graph
+E11_inst = E11_tmp[E11_tmp$whole_data.hhrn <= 11021,]
+
+##eliminate institutions for now in variable that will become csv file to write into python notebook and later gephi
+E11 = E11_tmp[E11_tmp$whole_data.hhrn >= 110000,]
+
 
 names(E11)[1]<-"ID"
 names(E11)[2]<-"Site"
@@ -299,9 +306,8 @@ names(E11)[2]<-"Site"
 #selects all edges from g graph (3rd column of E_melted11)
 #need to weight these values, weakly being the most heavily weighted and yearly being the least heavily weighted
 
-attach(E_melted11)
 E11.value<-rep(E11[,4])  #E11.value is what will be used to assign numerical values to the frequency values (Monthly, etc)
-E11.recode<-rep(0, 437)
+E11.recode<-rep(0, 268)
 
 #assign numerical values (edge weights) to frequencies
 E11.recode[E11.value=="Yearly"]<-1
@@ -310,8 +316,76 @@ E11.recode[E11.value=="Monthly"]<-3
 E11.recode[E11.value=="Biweekly"]<-4
 E11.recode[E11.value=="Weekly"]<-5
 
+#do the same for institutions##############################
+
+names(E11_inst)[1]<-"ID"
+names(E11_inst)[2]<-"Site"
+
+E11_inst.value<-rep(E11_inst[,4])
+E11_inst.recode<-rep(0, 206)
+E11_inst.recode[E11_inst.value=="Yearly"]<-1
+E11_inst.recode[E11_inst.value=="Seasonally"]<-2
+E11_inst.recode[E11_inst.value=="Monthly"]<-3
+E11_inst.recode[E11_inst.value=="Biweekly"]<-4
+E11_inst.recode[E11_inst.value=="Weekly"]<-5
+
+
+E11_inst.var<-rep(E11_inst[,3])
+E11_inst.contacts<-rep(0, 206)
+
+E11_inst.contacts[E11_inst.var=="Hh_23e_1"]<-"Chief"
+E11_inst.contacts[E11_inst.var=="Hh_23e_2"]<-"Farmers"
+E11_inst.contacts[E11_inst.var=="Hh_23e_3"]<-"Neighbor/friend"
+E11_inst.contacts[E11_inst.var=="Hh_23e_4"]<-"Weekly market vendor"
+E11_inst.contacts[E11_inst.var=="Hh_23e_5"]<-"Urban vendor"
+E11_inst.contacts[E11_inst.var=="Hh_23e_6"]<-"Vendor in agro-vet shop"
+E11_inst.contacts[E11_inst.var=="Hh_23e_7"]<-"Teacher"
+E11_inst.contacts[E11_inst.var=="Hh_23e_8"]<-"Religious leader"
+E11_inst.contacts[E11_inst.var=="Hh_23e_9"]<-"Extension agent"
+E11_inst.contacts[E11_inst.var=="Hh_23e_10"]<-"NGO agent"
+E11_inst.contacts[E11_inst.var=="Hh_23e_11"]<-"Vet service provider"
+E11_inst.contacts[E11_inst.var=="Hh_23e_12"]<-"Gvt parastatal"
+E11_inst.contacts[E11_inst.var=="Hh_23e_13"]<-"Ag researcher"
+E11_inst.contacts[E11_inst.var=="Hh_23e_14"]<-"Microfinance rep"
+E11_inst.contacts[E11_inst.var=="Hh_23e_15"]<-"Tractor owner"
+E11_inst.contacts[E11_inst.var=="Hh_23e_16"]<-"Farmer org. leader"
+E11_inst.contacts[E11_inst.var=="Hh_23e_17"]<-"Women's org. leader"
+E11_inst.contacts[E11_inst.var=="Hh_23e_18"]<-"Youth org. leader"
+E11_inst.contacts[E11_inst.var=="Hh_23e_19"]<-"Local politican"
+E11_inst.contacts[E11_inst.var=="Hh_23e_20"]<-"Other"
+
+##change ID to word for gephi
+E11_inst.id<-rep(E11_inst[,1])
+E11_inst.idname<-rep(0, 206)
+
+E11_inst.idname[E11_inst.id=="11001"]<-"Chief"
+E11_inst.idname[E11_inst.id=="11002"]<-"Farmers"
+E11_inst.idname[E11_inst.id=="11003"]<-"Neighbor/friend"
+E11_inst.idname[E11_inst.id=="11004"]<-"Weekly market vendor"
+E11_inst.idname[E11_inst.id=="11005"]<-"Urban vendor"
+E11_inst.idname[E11_inst.id=="11006"]<-"Vendor in agro-vet shop"
+E11_inst.idname[E11_inst.id=="11007"]<-"Teacher"
+E11_inst.idname[E11_inst.id=="11008"]<-"Religious leader"
+E11_inst.idname[E11_inst.id=="11009"]<-"Extension agent"
+E11_inst.idname[E11_inst.id=="11010"]<-"NGO agent"
+E11_inst.idname[E11_inst.id=="11011"]<-"Vet service provider"
+E11_inst.idname[E11_inst.id=="11012"]<-"Gvt parastatal"
+E11_inst.idname[E11_inst.id=="11013"]<-"Ag researcher"
+E11_inst.idname[E11_inst.id=="11014"]<-"Microfinance rep"
+E11_inst.idname[E11_inst.id=="11015"]<-"Tractor owner"
+E11_inst.idname[E11_inst.id=="11016"]<-"Farmer org. leader"
+E11_inst.idname[E11_inst.id=="11017"]<-"Women's org. leader"
+E11_inst.idname[E11_inst.id=="11018"]<-"Youth org. leader"
+E11_inst.idname[E11_inst.id=="11019"]<-"Local politican"
+E11_inst.idname[E11_inst.id=="11020"]<-"Other"
+
+E11_inst_weighted<-data.frame(id=E11_inst.idname,var=E11_inst.contacts,value=E11_inst.recode) # create a new dataframe that includes edge weights
+
+write.table(E11_inst_weighted, "~/Documents/E11_inst.csv")
+####
+
 E11.var<-rep(E11[,3])
-E11.contacts<-rep(0, 437)
+E11.contacts<-rep(0, 268)
 
 E11.contacts[E11.var=="Hh_23e_1"]<-"Chief"
 E11.contacts[E11.var=="Hh_23e_2"]<-"Farmers"
@@ -343,15 +417,16 @@ write.table(E11_weighted, "~/Documents/E11.csv")
 E11_newpairs_tmp = read.csv('/home/ndssl/newpairsE11.csv', header=T)
 E11_newpairs = data.frame(E11_newpairs_tmp$id, E11_newpairs_tmp$var, E11_newpairs_tmp$value)
 
-names(E11_newpairs)[1] <- "ID"
+names(E11_newpairs)[1] <- "id"
 names(E11_newpairs)[2] <- "var"
 names(E11_newpairs)[3] <- "value"
 
-g = graph.data.frame(E11_newpairs)
+#combine the institutions and the new pairs into one data frame to write out to gephi
+colnames(E11_inst_weighted) <- colnames(E11_newpairs)
+E11_whole <- rbind(E11_newpairs, E11_inst_weighted)
 
-
+g = graph.data.frame(E11_whole)
 write.graph(g, "site11.graphml", format= "graphml")
-
 
 
 #site 12
@@ -361,7 +436,14 @@ E_melted12 = questionE[questionE$whole_data.Site == 12,]
 E_melted12 = melt.data.frame(E_melted12, id.vars=c('whole_data.hhrn', 'whole_data.Site'))
 
 ##eliminate responses of "Never"
-E12 = E_melted12[E_melted12$value != "Never",]
+E12_tmp = E_melted12[E_melted12$value != "Never",]
+
+#create variable of just the institutions, to then use to add edges to the graph
+E12_inst = E12_tmp[E12_tmp$whole_data.hhrn <= 12021,]
+
+##eliminate institutions for now in variable that will become csv file to write into python notebook and later gephi
+E12 = E12_tmp[E12_tmp$whole_data.hhrn >= 110000,]
+
 
 names(E12)[1]<-"ID"
 names(E12)[2]<-"Site"
@@ -370,9 +452,8 @@ names(E12)[2]<-"Site"
 #selects all edges from g graph (3rd column of E_melted11)
 #need to weight these values, weakly being the most heavily weighted and yearly being the least heavily weighted
 
-attach(E_melted12)
 E12.value<-rep(E12[,4])  #E11.value is what will be used to assign numerical values to the frequency values (Monthly, etc)
-E12.recode<-rep(0, 437)
+E12.recode<-rep(0, 670)
 
 #assign numerical values (edge weights) to frequencies
 E12.recode[E12.value=="Yearly"]<-1
@@ -381,8 +462,76 @@ E12.recode[E12.value=="Monthly"]<-3
 E12.recode[E12.value=="Biweekly"]<-4
 E12.recode[E12.value=="Weekly"]<-5
 
+#do the same for institutions##############################
+
+names(E12_inst)[1]<-"ID"
+names(E12_inst)[2]<-"Site"
+
+E12_inst.value<-rep(E12_inst[,4])
+E12_inst.recode<-rep(0, 206)
+E12_inst.recode[E12_inst.value=="Yearly"]<-1
+E12_inst.recode[E12_inst.value=="Seasonally"]<-2
+E12_inst.recode[E12_inst.value=="Monthly"]<-3
+E12_inst.recode[E12_inst.value=="Biweekly"]<-4
+E12_inst.recode[E12_inst.value=="Weekly"]<-5
+
+
+E12_inst.var<-rep(E12_inst[,3])
+E12_inst.contacts<-rep(0, 206)
+
+E12_inst.contacts[E12_inst.var=="Hh_23e_1"]<-"Chief"
+E12_inst.contacts[E12_inst.var=="Hh_23e_2"]<-"Farmers"
+E12_inst.contacts[E12_inst.var=="Hh_23e_3"]<-"Neighbor/friend"
+E12_inst.contacts[E12_inst.var=="Hh_23e_4"]<-"Weekly market vendor"
+E12_inst.contacts[E12_inst.var=="Hh_23e_5"]<-"Urban vendor"
+E12_inst.contacts[E12_inst.var=="Hh_23e_6"]<-"Vendor in agro-vet shop"
+E12_inst.contacts[E12_inst.var=="Hh_23e_7"]<-"Teacher"
+E12_inst.contacts[E12_inst.var=="Hh_23e_8"]<-"Religious leader"
+E12_inst.contacts[E12_inst.var=="Hh_23e_9"]<-"Extension agent"
+E12_inst.contacts[E12_inst.var=="Hh_23e_10"]<-"NGO agent"
+E12_inst.contacts[E12_inst.var=="Hh_23e_11"]<-"Vet service provider"
+E12_inst.contacts[E12_inst.var=="Hh_23e_12"]<-"Gvt parastatal"
+E12_inst.contacts[E12_inst.var=="Hh_23e_13"]<-"Ag researcher"
+E12_inst.contacts[E12_inst.var=="Hh_23e_14"]<-"Microfinance rep"
+E12_inst.contacts[E12_inst.var=="Hh_23e_15"]<-"Tractor owner"
+E12_inst.contacts[E12_inst.var=="Hh_23e_16"]<-"Farmer org. leader"
+E12_inst.contacts[E12_inst.var=="Hh_23e_17"]<-"Women's org. leader"
+E12_inst.contacts[E12_inst.var=="Hh_23e_18"]<-"Youth org. leader"
+E12_inst.contacts[E12_inst.var=="Hh_23e_19"]<-"Local politican"
+E12_inst.contacts[E12_inst.var=="Hh_23e_20"]<-"Other"
+
+##change ID to word for gephi
+E12_inst.id<-rep(E12_inst[,1])
+E12_inst.idname<-rep(0, 206)
+
+E12_inst.idname[E12_inst.id=="12001"]<-"Chief"
+E12_inst.idname[E12_inst.id=="12002"]<-"Farmers"
+E12_inst.idname[E12_inst.id=="12003"]<-"Neighbor/friend"
+E12_inst.idname[E12_inst.id=="12004"]<-"Weekly market vendor"
+E12_inst.idname[E12_inst.id=="12005"]<-"Urban vendor"
+E12_inst.idname[E12_inst.id=="12006"]<-"Vendor in agro-vet shop"
+E12_inst.idname[E12_inst.id=="12007"]<-"Teacher"
+E12_inst.idname[E12_inst.id=="12008"]<-"Religious leader"
+E12_inst.idname[E12_inst.id=="12009"]<-"Extension agent"
+E12_inst.idname[E12_inst.id=="12010"]<-"NGO agent"
+E12_inst.idname[E12_inst.id=="12011"]<-"Vet service provider"
+E12_inst.idname[E12_inst.id=="12012"]<-"Gvt parastatal"
+E12_inst.idname[E12_inst.id=="12013"]<-"Ag researcher"
+E12_inst.idname[E12_inst.id=="12014"]<-"Microfinance rep"
+E12_inst.idname[E12_inst.id=="12015"]<-"Tractor owner"
+E12_inst.idname[E12_inst.id=="12016"]<-"Farmer org. leader"
+E12_inst.idname[E12_inst.id=="12017"]<-"Women's org. leader"
+E12_inst.idname[E12_inst.id=="12018"]<-"Youth org. leader"
+E12_inst.idname[E12_inst.id=="12019"]<-"Local politican"
+E12_inst.idname[E12_inst.id=="12020"]<-"Other"
+
+E12_inst_weighted<-data.frame(id=E12_inst.idname,var=E12_inst.contacts,value=E12_inst.recode) # create a new dataframe that includes edge weights
+
+write.table(E12_inst_weighted, "~/Documents/E12_inst.csv")
+####
+
 E12.var<-rep(E12[,3])
-E12.contacts<-rep(0, 437)
+E12.contacts<-rep(0, 670)
 
 E12.contacts[E12.var=="Hh_23e_1"]<-"Chief"
 E12.contacts[E12.var=="Hh_23e_2"]<-"Farmers"
@@ -414,23 +563,31 @@ write.table(E12_weighted, "~/Documents/E12.csv")
 E12_newpairs_tmp = read.csv('/home/ndssl/newpairsE12.csv', header=T)
 E12_newpairs = data.frame(E12_newpairs_tmp$id, E12_newpairs_tmp$var, E12_newpairs_tmp$value)
 
-names(E12_newpairs)[1] <- "ID"
+names(E12_newpairs)[1] <- "id"
 names(E12_newpairs)[2] <- "var"
 names(E12_newpairs)[3] <- "value"
 
-g = graph.data.frame(E12_newpairs)
+#combine the institutions and the new pairs into one data frame to write out to gephi
+colnames(E12_inst_weighted) <- colnames(E12_newpairs)
+E12_whole <- rbind(E12_newpairs, E12_inst_weighted)
 
-
+g = graph.data.frame(E12_whole)
 write.graph(g, "site12.graphml", format= "graphml")
 
-#site13
 
+#site13
 questionE = data.frame(Combined[c(grep("Hh_23e_*", colnames(Combined)))], whole_data$hhrn, whole_data$Site) #create data frame with question e variables and identifying variables
 E_melted13 = questionE[questionE$whole_data.Site == 13,]
 E_melted13 = melt.data.frame(E_melted13, id.vars=c('whole_data.hhrn', 'whole_data.Site'))
 
 ##eliminate responses of "Never"
 E13 = E_melted13[E_melted13$value != "Never",]
+
+#create variable of just the institutions, to then use to add edges to the graph
+E13_inst = E13_tmp[E13_tmp$whole_data.hhrn <= 13021,]
+
+##eliminate institutions for now in variable that will become csv file to write into python notebook and later gephi
+E13 = E13_tmp[E13_tmp$whole_data.hhrn >= 210000,]
 
 names(E13)[1]<-"ID"
 names(E13)[2]<-"Site"
@@ -499,6 +656,12 @@ E_melted23 = melt.data.frame(E_melted23, id.vars=c('whole_data.hhrn', 'whole_dat
 
 ##eliminate responses of "Never"
 E23 = E_melted23[E_melted23$value != "Never",]
+
+#create variable of just the institutions, to then use to add edges to the graph
+E23_inst = E23_tmp[E23_tmp$whole_data.hhrn <= 23021,]
+
+##eliminate institutions for now in variable that will become csv file to write into python notebook and later gephi
+E23 = E23_tmp[E23_tmp$whole_data.hhrn >= 230000,]
 
 names(E23)[1]<-"ID"
 names(E23)[2]<-"Site"
@@ -865,7 +1028,6 @@ names(Tillbeliefs11)[1] <- "ID"
 
 Till_var11 = merge(Tillbeliefs11,ind_var11, by="ID")
 
-
 #########################################################################
 
 #regressions
@@ -897,3 +1059,9 @@ dbinom(5, size=88, prob=.4)
 #multinomial distribution
 
 library(MASS)
+
+belief.table11 = (table(Tillage11$beliefs))/88
+#divide each of the values in the total by the sum of all responses
+
+belief.prob11 = c(0.07954545, 0.25000000, 0.27272727, 0.29545455, 0.10227273)
+chisq.test(belief.table11, p=belief.prob11) 
