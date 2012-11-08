@@ -528,6 +528,7 @@ E12_inst.idname[E12_inst.id=="12020"]<-"Other"
 E12_inst_weighted<-data.frame(id=E12_inst.idname,var=E12_inst.contacts,value=E12_inst.recode) # create a new dataframe that includes edge weights
 
 write.table(E12_inst_weighted, "~/Documents/E12_inst.csv")
+
 ####
 
 E12.var<-rep(E12[,3])
@@ -575,19 +576,21 @@ g = graph.data.frame(E12_whole)
 write.graph(g, "site12.graphml", format= "graphml")
 
 
-#site13
+#site13################################################################
+
 questionE = data.frame(Combined[c(grep("Hh_23e_*", colnames(Combined)))], whole_data$hhrn, whole_data$Site) #create data frame with question e variables and identifying variables
 E_melted13 = questionE[questionE$whole_data.Site == 13,]
 E_melted13 = melt.data.frame(E_melted13, id.vars=c('whole_data.hhrn', 'whole_data.Site'))
 
 ##eliminate responses of "Never"
-E13 = E_melted13[E_melted13$value != "Never",]
+E13_tmp = E_melted13[E_melted13$value != "Never",]
 
 #create variable of just the institutions, to then use to add edges to the graph
 E13_inst = E13_tmp[E13_tmp$whole_data.hhrn <= 13021,]
 
 ##eliminate institutions for now in variable that will become csv file to write into python notebook and later gephi
 E13 = E13_tmp[E13_tmp$whole_data.hhrn >= 210000,]
+
 
 names(E13)[1]<-"ID"
 names(E13)[2]<-"Site"
@@ -596,9 +599,8 @@ names(E13)[2]<-"Site"
 #selects all edges from g graph (3rd column of E_melted11)
 #need to weight these values, weakly being the most heavily weighted and yearly being the least heavily weighted
 
-attach(E_melted13)
 E13.value<-rep(E13[,4])  #E11.value is what will be used to assign numerical values to the frequency values (Monthly, etc)
-E13.recode<-rep(0, 437)
+E13.recode<-rep(0, 610)
 
 #assign numerical values (edge weights) to frequencies
 E13.recode[E13.value=="Yearly"]<-1
@@ -607,8 +609,77 @@ E13.recode[E13.value=="Monthly"]<-3
 E13.recode[E13.value=="Biweekly"]<-4
 E13.recode[E13.value=="Weekly"]<-5
 
+#do the same for institutions##############################
+
+names(E13_inst)[1]<-"ID"
+names(E13_inst)[2]<-"Site"
+
+E13_inst.value<-rep(E13_inst[,4])
+E13_inst.recode<-rep(0, 267)
+E13_inst.recode[E13_inst.value=="Yearly"]<-1
+E13_inst.recode[E13_inst.value=="Seasonally"]<-2
+E13_inst.recode[E13_inst.value=="Monthly"]<-3
+E13_inst.recode[E13_inst.value=="Biweekly"]<-4
+E13_inst.recode[E13_inst.value=="Weekly"]<-5
+
+
+E13_inst.var<-rep(E13_inst[,3])
+E13_inst.contacts<-rep(0, 267)
+
+E13_inst.contacts[E13_inst.var=="Hh_23e_1"]<-"Chief"
+E13_inst.contacts[E13_inst.var=="Hh_23e_2"]<-"Farmers"
+E13_inst.contacts[E13_inst.var=="Hh_23e_3"]<-"Neighbor/friend"
+E13_inst.contacts[E13_inst.var=="Hh_23e_4"]<-"Weekly market vendor"
+E13_inst.contacts[E13_inst.var=="Hh_23e_5"]<-"Urban vendor"
+E13_inst.contacts[E13_inst.var=="Hh_23e_6"]<-"Vendor in agro-vet shop"
+E13_inst.contacts[E13_inst.var=="Hh_23e_7"]<-"Teacher"
+E13_inst.contacts[E13_inst.var=="Hh_23e_8"]<-"Religious leader"
+E13_inst.contacts[E13_inst.var=="Hh_23e_9"]<-"Extension agent"
+E13_inst.contacts[E13_inst.var=="Hh_23e_10"]<-"NGO agent"
+E13_inst.contacts[E13_inst.var=="Hh_23e_11"]<-"Vet service provider"
+E13_inst.contacts[E13_inst.var=="Hh_23e_12"]<-"Gvt parastatal"
+E13_inst.contacts[E13_inst.var=="Hh_23e_13"]<-"Ag researcher"
+E13_inst.contacts[E13_inst.var=="Hh_23e_14"]<-"Microfinance rep"
+E13_inst.contacts[E13_inst.var=="Hh_23e_15"]<-"Tractor owner"
+E13_inst.contacts[E13_inst.var=="Hh_23e_16"]<-"Farmer org. leader"
+E13_inst.contacts[E13_inst.var=="Hh_23e_17"]<-"Women's org. leader"
+E13_inst.contacts[E13_inst.var=="Hh_23e_18"]<-"Youth org. leader"
+E13_inst.contacts[E13_inst.var=="Hh_23e_19"]<-"Local politican"
+E13_inst.contacts[E13_inst.var=="Hh_23e_20"]<-"Other"
+
+##change ID to word for gephi
+E13_inst.id<-rep(E13_inst[,1])
+E13_inst.idname<-rep(0, 267)
+
+E13_inst.idname[E13_inst.id=="13001"]<-"Chief"
+E13_inst.idname[E13_inst.id=="13002"]<-"Farmers"
+E13_inst.idname[E13_inst.id=="13003"]<-"Neighbor/friend"
+E13_inst.idname[E13_inst.id=="13004"]<-"Weekly market vendor"
+E13_inst.idname[E13_inst.id=="13005"]<-"Urban vendor"
+E13_inst.idname[E13_inst.id=="13006"]<-"Vendor in agro-vet shop"
+E13_inst.idname[E13_inst.id=="13007"]<-"Teacher"
+E13_inst.idname[E13_inst.id=="13008"]<-"Religious leader"
+E13_inst.idname[E13_inst.id=="13009"]<-"Extension agent"
+E13_inst.idname[E13_inst.id=="13010"]<-"NGO agent"
+E13_inst.idname[E13_inst.id=="13011"]<-"Vet service provider"
+E13_inst.idname[E13_inst.id=="13012"]<-"Gvt parastatal"
+E13_inst.idname[E13_inst.id=="13013"]<-"Ag researcher"
+E13_inst.idname[E13_inst.id=="13014"]<-"Microfinance rep"
+E13_inst.idname[E13_inst.id=="13015"]<-"Tractor owner"
+E13_inst.idname[E13_inst.id=="13016"]<-"Farmer org. leader"
+E13_inst.idname[E13_inst.id=="13017"]<-"Women's org. leader"
+E13_inst.idname[E13_inst.id=="13018"]<-"Youth org. leader"
+E13_inst.idname[E13_inst.id=="13019"]<-"Local politican"
+E13_inst.idname[E13_inst.id=="13020"]<-"Other"
+
+E13_inst_weighted<-data.frame(id=E13_inst.idname,var=E13_inst.contacts,value=E13_inst.recode) # create a new dataframe that includes edge weights
+
+write.table(E13_inst_weighted, "~/Documents/E13_inst.csv")
+
+####
+
 E13.var<-rep(E13[,3])
-E13.contacts<-rep(0, 437)
+E13.contacts<-rep(0, 610)
 
 E13.contacts[E13.var=="Hh_23e_1"]<-"Chief"
 E13.contacts[E13.var=="Hh_23e_2"]<-"Farmers"
@@ -631,7 +702,8 @@ E13.contacts[E13.var=="Hh_23e_18"]<-"Youth org. leader"
 E13.contacts[E13.var=="Hh_23e_19"]<-"Local politican"
 E13.contacts[E13.var=="Hh_23e_20"]<-"Other"
 
-E13_weighted<-data.frame(id=E13[,1],var=E13.contacts,value=E13.recode) # create a new dataframe that includes edge weights
+E13_weighted.tmp <-data.frame(id=E13[,1],var=E13.contacts,value=E13.recode) # create a new dataframe that includes edge weights
+E13_weighted <- E13_weighted.tmp[c(-610),]
 
 write.table(E13_weighted, "~/Documents/E13.csv")
 
@@ -640,28 +712,32 @@ write.table(E13_weighted, "~/Documents/E13.csv")
 E13_newpairs_tmp = read.csv('/home/ndssl/newpairsE13.csv', header=T)
 E13_newpairs = data.frame(E13_newpairs_tmp$id, E13_newpairs_tmp$var, E13_newpairs_tmp$value)
 
-names(E13_newpairs)[1] <- "ID"
+names(E13_newpairs)[1] <- "id"
 names(E13_newpairs)[2] <- "var"
 names(E13_newpairs)[3] <- "value"
 
-g = graph.data.frame(E13_newpairs)
+#combine the institutions and the new pairs into one data frame to write out to gephi
+colnames(E13_inst_weighted) <- colnames(E13_newpairs)
+E13_whole <- rbind(E13_newpairs, E13_inst_weighted)
 
+g = graph.data.frame(E13_whole)
 write.graph(g, "site13.graphml", format= "graphml")
 
-#site 23
+#site 23#########################################################################
 
 questionE = data.frame(Combined[c(grep("Hh_23e_*", colnames(Combined)))], whole_data$hhrn, whole_data$Site) #create data frame with question e variables and identifying variables
 E_melted23 = questionE[questionE$whole_data.Site == 23,]
 E_melted23 = melt.data.frame(E_melted23, id.vars=c('whole_data.hhrn', 'whole_data.Site'))
 
 ##eliminate responses of "Never"
-E23 = E_melted23[E_melted23$value != "Never",]
+E23_tmp = E_melted23[E_melted23$value != "Never",]
 
 #create variable of just the institutions, to then use to add edges to the graph
-E23_inst = E23_tmp[E23_tmp$whole_data.hhrn <= 23021,]
-
+E23_inst_tmp = E23_tmp[E23_tmp$whole_data.hhrn <= 23021,]
+E23_inst = na.omit(E23_inst_tmp)
 ##eliminate institutions for now in variable that will become csv file to write into python notebook and later gephi
-E23 = E23_tmp[E23_tmp$whole_data.hhrn >= 230000,]
+E23 = na.omit(E23_tmp[E23_tmp$whole_data.hhrn >= 230000,])
+
 
 names(E23)[1]<-"ID"
 names(E23)[2]<-"Site"
@@ -670,9 +746,8 @@ names(E23)[2]<-"Site"
 #selects all edges from g graph (3rd column of E_melted11)
 #need to weight these values, weakly being the most heavily weighted and yearly being the least heavily weighted
 
-attach(E_melted23)
 E23.value<-rep(E23[,4])  #E11.value is what will be used to assign numerical values to the frequency values (Monthly, etc)
-E23.recode<-rep(0, 437)
+E23.recode<-rep(0, 607)
 
 #assign numerical values (edge weights) to frequencies
 E23.recode[E23.value=="Yearly"]<-1
@@ -681,8 +756,78 @@ E23.recode[E23.value=="Monthly"]<-3
 E23.recode[E23.value=="Biweekly"]<-4
 E23.recode[E23.value=="Weekly"]<-5
 
+#do the same for institutions##############################
+
+names(E23_inst)[1]<-"ID"
+names(E23_inst)[2]<-"Site"
+
+E23_inst.value<-rep(E23_inst[,4])
+E23_inst.recode<-rep(0, 238)
+E23_inst.recode[E23_inst.value=="Yearly"]<-1
+E23_inst.recode[E23_inst.value=="Seasonally"]<-2
+E23_inst.recode[E23_inst.value=="Monthly"]<-3
+E23_inst.recode[E23_inst.value=="Biweekly"]<-4
+E23_inst.recode[E23_inst.value=="Weekly"]<-5
+
+
+E23_inst.var<-rep(E23_inst[,3])
+E23_inst.contacts<-rep(0, 238)
+
+E23_inst.contacts[E23_inst.var=="Hh_23e_1"]<-"Chief"
+E23_inst.contacts[E23_inst.var=="Hh_23e_2"]<-"Farmers"
+E23_inst.contacts[E23_inst.var=="Hh_23e_3"]<-"Neighbor/friend"
+E23_inst.contacts[E23_inst.var=="Hh_23e_4"]<-"Weekly market vendor"
+E23_inst.contacts[E23_inst.var=="Hh_23e_5"]<-"Urban vendor"
+E23_inst.contacts[E23_inst.var=="Hh_23e_6"]<-"Vendor in agro-vet shop"
+E23_inst.contacts[E23_inst.var=="Hh_23e_7"]<-"Teacher"
+E23_inst.contacts[E23_inst.var=="Hh_23e_8"]<-"Religious leader"
+E23_inst.contacts[E23_inst.var=="Hh_23e_9"]<-"Extension agent"
+E23_inst.contacts[E23_inst.var=="Hh_23e_10"]<-"NGO agent"
+E23_inst.contacts[E23_inst.var=="Hh_23e_11"]<-"Vet service provider"
+E23_inst.contacts[E23_inst.var=="Hh_23e_12"]<-"Gvt parastatal"
+E23_inst.contacts[E23_inst.var=="Hh_23e_13"]<-"Ag researcher"
+E23_inst.contacts[E23_inst.var=="Hh_23e_14"]<-"Microfinance rep"
+E23_inst.contacts[E23_inst.var=="Hh_23e_15"]<-"Tractor owner"
+E23_inst.contacts[E23_inst.var=="Hh_23e_16"]<-"Farmer org. leader"
+E23_inst.contacts[E23_inst.var=="Hh_23e_17"]<-"Women's org. leader"
+E23_inst.contacts[E23_inst.var=="Hh_23e_18"]<-"Youth org. leader"
+E23_inst.contacts[E23_inst.var=="Hh_23e_19"]<-"Local politican"
+E23_inst.contacts[E23_inst.var=="Hh_23e_20"]<-"Other"
+
+##change ID to word for gephi
+E23_inst.id<-rep(E23_inst[,1])
+E23_inst.idname<-rep(0, 238)
+
+E23_inst.idname[E23_inst.id=="23001"]<-"Chief"
+E23_inst.idname[E23_inst.id=="23002"]<-"Farmers"
+E23_inst.idname[E23_inst.id=="23003"]<-"Neighbor/friend"
+E23_inst.idname[E23_inst.id=="23004"]<-"Weekly market vendor"
+E23_inst.idname[E23_inst.id=="23005"]<-"Urban vendor"
+E23_inst.idname[E23_inst.id=="23006"]<-"Vendor in agro-vet shop"
+E23_inst.idname[E23_inst.id=="23007"]<-"Teacher"
+E23_inst.idname[E23_inst.id=="23008"]<-"Religious leader"
+E23_inst.idname[E23_inst.id=="23009"]<-"Extension agent"
+E23_inst.idname[E23_inst.id=="23010"]<-"NGO agent"
+E23_inst.idname[E23_inst.id=="23011"]<-"Vet service provider"
+E23_inst.idname[E23_inst.id=="23012"]<-"Gvt parastatal"
+E23_inst.idname[E23_inst.id=="23013"]<-"Ag researcher"
+E23_inst.idname[E23_inst.id=="23014"]<-"Microfinance rep"
+E23_inst.idname[E23_inst.id=="23015"]<-"Tractor owner"
+E23_inst.idname[E23_inst.id=="23016"]<-"Farmer org. leader"
+E23_inst.idname[E23_inst.id=="23017"]<-"Women's org. leader"
+E23_inst.idname[E23_inst.id=="23018"]<-"Youth org. leader"
+E23_inst.idname[E23_inst.id=="23019"]<-"Local politican"
+E23_inst.idname[E23_inst.id=="23020"]<-"Other"
+E23_inst.idname[E23_inst.id=="23021"]<-"Other"
+
+E23_inst_weighted<-data.frame(id=E23_inst.idname,var=E23_inst.contacts,value=E23_inst.recode) # create a new dataframe that includes edge weights
+
+write.table(E23_inst_weighted, "~/Documents/E23_inst.csv")
+
+####
+
 E23.var<-rep(E23[,3])
-E23.contacts<-rep(0, 437)
+E23.contacts<-rep(0, 607)
 
 E23.contacts[E23.var=="Hh_23e_1"]<-"Chief"
 E23.contacts[E23.var=="Hh_23e_2"]<-"Farmers"
@@ -705,23 +850,26 @@ E23.contacts[E23.var=="Hh_23e_18"]<-"Youth org. leader"
 E23.contacts[E23.var=="Hh_23e_19"]<-"Local politican"
 E23.contacts[E23.var=="Hh_23e_20"]<-"Other"
 
+
 E23_weighted<-data.frame(id=E23[,1],var=E23.contacts,value=E23.recode) # create a new dataframe that includes edge weights
 
 write.table(E23_weighted, "~/Documents/E23.csv")
 
 ##read in new farmer to farmer pairs created from python script
 
-E23_newpairs_tmp= read.csv('/home/ndssl/newpairsE23.csv', header=T)
+E23_newpairs_tmp = read.csv('/home/ndssl/newpairsE23.csv', header=T)
 E23_newpairs = data.frame(E23_newpairs_tmp$id, E23_newpairs_tmp$var, E23_newpairs_tmp$value)
 
-names(E23_newpairs)[1] <- "ID"
+names(E23_newpairs)[1] <- "id"
 names(E23_newpairs)[2] <- "var"
 names(E23_newpairs)[3] <- "value"
 
-g = graph.data.frame(E23_newpairs)
+#combine the institutions and the new pairs into one data frame to write out to gephi
+colnames(E23_inst_weighted) <- colnames(E23_newpairs)
+E23_whole <- rbind(E23_newpairs, E23_inst_weighted)
 
+g = graph.data.frame(E23_whole)
 write.graph(g, "site23.graphml", format= "graphml")
-
 
 #######################################################################
 
