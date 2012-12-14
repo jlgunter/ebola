@@ -414,7 +414,7 @@ write.table(E11_weighted, "~/Documents/E11.csv")
 
 ##read in new farmer to farmer pairs created from python script
 
-E11_newpairs_tmp = read.csv('/home/ndssl/newpairsE11.csv', header=T)
+E11_newpairs_tmp = read.csv('/home/ndssl/Documents/py/newpairsE11.csv', header=T)
 E11_newpairs = data.frame(E11_newpairs_tmp$id, E11_newpairs_tmp$var, E11_newpairs_tmp$value)
 
 names(E11_newpairs)[1] <- "id"
@@ -878,14 +878,19 @@ write.graph(g, "site23.graphml", format= "graphml")
 #data frame = site11
 #want columns 1, 2, 3, 5
 
-site11_tmp = read.csv('/home/ndssl/Documents/Sim_output/site11graph.out', header=T)
+site11_run02_tmp = read.csv('/home/ndssl/Documents/run02/site11graph.out', header=T)
 library(reshape2)
 
-site11_out = colsplit(site11_tmp[,1], " ", c("id", "iter", "tstep", "na", "state", "thresh"))
+site11_run02 = colsplit(site11_run02_tmp[,1], " ", c("id", "iter", "tstep", "na", "state", "thresh"))
+#if iteration = 0
+which(site11_run02$state == 1) #y-axis
+#x-axis should be timestep
 
 library(epitools)
 
-epicurve.table(site11_out$tstep, width = 1, space = 0, tick = TRUE, tick.offset = 0.5, segments = FALSE)
+barplot(table(site11_run02$tstep, which(site11_run02$state == 1,)))
+
+#epicurve.table(x=site11_run02$tstep, y=which(site11_run02$state == 1,), width = 1, space = 0, tick = TRUE, tick.offset = 0.5, segments = FALSE)
 
 library(epicalc)
 
