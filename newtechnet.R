@@ -3,8 +3,6 @@ library(Hmisc)
 library(reshape)
 library(plyr)
 
-#whole_data = read.csv('/home/ndssl/Desktop/technet.csv', header=T) #Read in data. Change filepath.
-
 whole_data = read.csv('/home/ndssl/Desktop/Technet_final_database.csv', header=T)
 
 
@@ -883,7 +881,7 @@ names(site11) <- c("id", "iter", "tstep", "na", "state", "thresh")
 library(epicalc)
 
 iter0 = site11[iter=="0",]
-attach(iter0)
+#attach(iter0)
 plot(tstep[state=="0"], Freq[state=="0"], xlab="Timestep", ylab="Infected nodes")
 
 x = data.frame(table(site11$iter, site11$state))

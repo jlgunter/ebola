@@ -881,14 +881,111 @@ write.graph(g, "site23.graphml", format= "graphml")
 site11_run02_tmp = read.csv('/home/ndssl/Documents/run02/site11graph.out', header=T)
 library(reshape2)
 
-site11_run02 = colsplit(site11_run02_tmp[,1], " ", c("id", "iter", "tstep", "na", "state", "thresh"))
-#if iteration = 0
-which(site11_run02$state == 1) #y-axis
+site11_run02_whole = colsplit(site11_run02_tmp[,1], " ", c("id", "iter", "tstep", "na", "state", "thresh"))
+site11_run02 = data.frame(site11_run02_whole$id, site11_run02_whole$iter, site11_run02_whole$tstep, site11_run02_whole$state)
+names(site11_run02)[1]<-'id'
+names(site11_run02)[2]<-'iter'
+names(site11_run02)[3]<-'tstep'
+names(site11_run02)[4]<-'state'
+
+susceptible = site11_run02[site11_run02$state==0,]
+
+y = which(site11_run02$state == 1) #y-axis
 #x-axis should be timestep
 
 library(epitools)
 
+#attach(site11_run02)
+x = tstep
+plot(x, state)
+points(x[iter==1], state[iter==1], col="blue")
+
+write.table(site11_run02,file="site11_run02.csv",sep=",",row.names=F)
+
+
+library(Epi)
+
+stat.table(tstep, data=site11_run02)
+#cross-tabulation
+stat.table(list(tstep, state), data=site11_run02)
+iterations <- transform(site11_run02,iters=cut(iter, breaks=c(0:50), right=FALSE))
+stat.table(agegrp,data=births)
+
+
 barplot(table(site11_run02$tstep, which(site11_run02$state == 1,)))
+
+library(epicalc)
+
+iter0 = site11_run02[iter=="0",]
+#attach(iter0)
+plot(iter0$tstep[state=="0"], iter0$Freq[state=="0"], xlab="Timestep", ylab="Infected nodes")
+
+x = data.frame(table(site11_run02$iter, site11_run02$state))
+names(x) <- c('iter', "state", "freq")
+x
+
+table = table(site11_run02$tstep, site11_run02$state)
+barplot(table, main="Infected nodes by timestep", xlab="timestep", ylab="Number of infected nodes", col=c("darkblue","red"), beside=TRUE)
+
+#want each iteration separately
+
+run02.iter0 = site11_run02[site11_run02$iter == 0,]
+run02.iter1 = site11_run02[site11_run02$iter == 1,]
+run02.iter2 = site11_run02[site11_run02$iter == 2,]
+run02.iter3 = site11_run02[site11_run02$iter == 3,]
+
+#melt to only include nodes in state 1
+
+inf.run02.0 = run02.iter0[run02.iter0$state != 0,]
+inf.run02.1 = run02.iter1[run02.iter1$state != 0,]
+inf.run02.2 = run02.iter2[run02.iter2$state != 0,]
+inf.run02.3 = run02.iter3[run02.iter3$state != 0,]
+
+#count the number of nodes that changed state at each timestep
+count(inf.run02.0$tstep == 30)
+
+#use that command to somehow make a graph of each timestep at each iteration?
+#if TRUE, plot or chart that number 
+
+table(inf.run02.0$tstep, inf.run02.0$state)
+test = table(inf.run02.0$tstep, inf.run02.0$state)
+
+test1 = survfit(Surv(run02.iter0$tstep, run02.iter0$state) ~1)
+test2 = survfit(Surv(run02.iter1$tstep, run02.iter1$state) ~1)
+test3 = survfit(Surv(run02.iter2$tstep, run02.iter2$state) ~1)
+test4 = survfit(Surv(run02.iter3$tstep, run02.iter3$state) ~1)
+
+
+plot(test1, main="Seed: NGO", xlab="timestep", ylab="survival function", col="red")
+lines(test2, col="blue")
+lines(test3, col="green")
+lines(test4, col="orange")
+
+#overall title
+title("Site 11, Run 02, iter 0:3: Kaplan-Meier estimate with 95% confidence bounds", outer=TRUE)
+
+#could do for whole iteration
+test5 = survfit(Surv(site11_run02$tstep, site11_run02$state) ~1)
+plot(test5)
+
+#import csvs from other sites, plot on same graph
+site11_run03_tmp = read.csv('/home/ndssl/Documents/run03/site11graph.out', header=T)
+
+site11_run03_whole = colsplit(site11_run03_tmp[,1], " ", c("id", "iter", "tstep", "na", "state", "thresh"))
+site11_run03 = data.frame(site11_run03_whole$id, site11_run03_whole$iter, site11_run03_whole$tstep, site11_run03_whole$state)
+names(site11_run03)[1]<-'id'
+names(site11_run03)[2]<-'iter'
+names(site11_run03)[3]<-'tstep'
+names(site11_run03)[4]<-'state'
+test_03 = survfit(Surv(site11_run03$tstep, site11_run03$state) ~1)
+plot(test_03)
+lines(test_03)
+
+which(site11_run03$state == 1)
+
+
+
+##########################################
 
 #epicurve.table(x=site11_run02$tstep, y=which(site11_run02$state == 1,), width = 1, space = 0, tick = TRUE, tick.offset = 0.5, segments = FALSE)
 
