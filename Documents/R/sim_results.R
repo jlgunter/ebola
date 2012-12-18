@@ -33,6 +33,7 @@ library(ggplot2)
 
 site11_run02_whole = site11_run02_new[site11_run02_new$state == 1,]
 
+http://wiki.stdout.org/rcookbook/Graphs/Plotting%20means%20and%20error%20bars%20%28ggplot2%29/#Helper%20functions
 
 summarySEwithin <- function(data=NULL, measurevar, betweenvars=NULL, withinvars=NULL,
                             idvar=NULL, na.rm=FALSE, conf.interval=.95, .drop=TRUE) {
