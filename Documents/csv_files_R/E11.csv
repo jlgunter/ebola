@@ -1,0 +1,269 @@
+"id" "var" "value"
+"1" 111003 "Farmers" 5
+"2" 111008 "Farmers" 5
+"3" 111009 "Farmers" 2
+"4" 111017 "Farmers" 5
+"5" 111023 "Farmers" 5
+"6" 111026 "Farmers" 3
+"7" 111027 "Farmers" 2
+"8" 111029 "Farmers" 3
+"9" 111037 "Farmers" 2
+"10" 111048 "Farmers" 1
+"11" 111057 "Farmers" 5
+"12" 111074 "Farmers" 5
+"13" 111079 "Farmers" 2
+"14" 111080 "Farmers" 2
+"15" 111084 "Farmers" 1
+"16" 111088 "Farmers" 2
+"17" 111099 "Farmers" 2
+"18" 111001 "Neighbor/friend" 2
+"19" 111003 "Neighbor/friend" 2
+"20" 111005 "Neighbor/friend" 5
+"21" 111011 "Neighbor/friend" 5
+"22" 111013 "Neighbor/friend" 5
+"23" 111014 "Neighbor/friend" 5
+"24" 111015 "Neighbor/friend" 5
+"25" 111016 "Neighbor/friend" 5
+"26" 111020 "Neighbor/friend" 4
+"27" 111021 "Neighbor/friend" 1
+"28" 111022 "Neighbor/friend" 3
+"29" 111029 "Neighbor/friend" 3
+"30" 111037 "Neighbor/friend" 2
+"31" 111043 "Neighbor/friend" 4
+"32" 111048 "Neighbor/friend" 1
+"33" 111052 "Neighbor/friend" 5
+"34" 111053 "Neighbor/friend" 5
+"35" 111054 "Neighbor/friend" 4
+"36" 111055 "Neighbor/friend" 4
+"37" 111056 "Neighbor/friend" 5
+"38" 111057 "Neighbor/friend" 5
+"39" 111058 "Neighbor/friend" 4
+"40" 111061 "Neighbor/friend" 5
+"41" 111063 "Neighbor/friend" 4
+"42" 111064 "Neighbor/friend" 4
+"43" 111066 "Neighbor/friend" 5
+"44" 111069 "Neighbor/friend" 1
+"45" 111073 "Neighbor/friend" 3
+"46" 111074 "Neighbor/friend" 5
+"47" 111076 "Neighbor/friend" 2
+"48" 111077 "Neighbor/friend" 2
+"49" 111079 "Neighbor/friend" 2
+"50" 111083 "Neighbor/friend" 2
+"51" 111085 "Neighbor/friend" 1
+"52" 111086 "Neighbor/friend" 2
+"53" 111087 "Neighbor/friend" 5
+"54" 111089 "Neighbor/friend" 2
+"55" 111091 "Neighbor/friend" 5
+"56" 111093 "Neighbor/friend" 2
+"57" 111094 "Neighbor/friend" 4
+"58" 111095 "Neighbor/friend" 2
+"59" 111098 "Neighbor/friend" 3
+"60" 111001 "Weekly market vendor" 2
+"61" 111003 "Weekly market vendor" 5
+"62" 111008 "Weekly market vendor" 3
+"63" 111011 "Weekly market vendor" 5
+"64" 111013 "Weekly market vendor" 5
+"65" 111019 "Weekly market vendor" 5
+"66" 111021 "Weekly market vendor" 2
+"67" 111022 "Weekly market vendor" 5
+"68" 111023 "Weekly market vendor" 5
+"69" 111026 "Weekly market vendor" 2
+"70" 111030 "Weekly market vendor" 5
+"71" 111031 "Weekly market vendor" 5
+"72" 111041 "Weekly market vendor" 2
+"73" 111043 "Weekly market vendor" 2
+"74" 111044 "Weekly market vendor" 2
+"75" 111045 "Weekly market vendor" 2
+"76" 111053 "Weekly market vendor" 2
+"77" 111054 "Weekly market vendor" 5
+"78" 111074 "Weekly market vendor" 5
+"79" 111078 "Weekly market vendor" 2
+"80" 111082 "Weekly market vendor" 2
+"81" 111083 "Weekly market vendor" 1
+"82" 111085 "Weekly market vendor" 2
+"83" 111087 "Weekly market vendor" 5
+"84" 111089 "Weekly market vendor" 4
+"85" 111093 "Weekly market vendor" 4
+"86" 111099 "Weekly market vendor" 4
+"87" 111101 "Weekly market vendor" 3
+"88" 111008 "Urban vendor" 3
+"89" 111010 "Urban vendor" 2
+"90" 111011 "Urban vendor" 2
+"91" 111014 "Urban vendor" 5
+"92" 111019 "Urban vendor" 2
+"93" 111027 "Urban vendor" 2
+"94" 111031 "Urban vendor" 2
+"95" 111033 "Urban vendor" 2
+"96" 111052 "Urban vendor" 2
+"97" 111066 "Urban vendor" 2
+"98" 111074 "Urban vendor" 5
+"99" 111077 "Urban vendor" 2
+"100" 111081 "Urban vendor" 2
+"101" 111090 "Urban vendor" 2
+"102" 111005 "Vendor in agro-vet shop" 2
+"103" 111007 "Vendor in agro-vet shop" 2
+"104" 111009 "Vendor in agro-vet shop" 2
+"105" 111013 "Vendor in agro-vet shop" 3
+"106" 111014 "Vendor in agro-vet shop" 3
+"107" 111017 "Vendor in agro-vet shop" 3
+"108" 111018 "Vendor in agro-vet shop" 2
+"109" 111019 "Vendor in agro-vet shop" 2
+"110" 111020 "Vendor in agro-vet shop" 2
+"111" 111021 "Vendor in agro-vet shop" 2
+"112" 111022 "Vendor in agro-vet shop" 2
+"113" 111033 "Vendor in agro-vet shop" 2
+"114" 111035 "Vendor in agro-vet shop" 2
+"115" 111038 "Vendor in agro-vet shop" 2
+"116" 111044 "Vendor in agro-vet shop" 2
+"117" 111046 "Vendor in agro-vet shop" 2
+"118" 111049 "Vendor in agro-vet shop" 2
+"119" 111053 "Vendor in agro-vet shop" 2
+"120" 111060 "Vendor in agro-vet shop" 2
+"121" 111067 "Vendor in agro-vet shop" 1
+"122" 111068 "Vendor in agro-vet shop" 1
+"123" 111070 "Vendor in agro-vet shop" 1
+"124" 111071 "Vendor in agro-vet shop" 2
+"125" 111072 "Vendor in agro-vet shop" 1
+"126" 111074 "Vendor in agro-vet shop" 5
+"127" 111080 "Vendor in agro-vet shop" 2
+"128" 111081 "Vendor in agro-vet shop" 2
+"129" 111088 "Vendor in agro-vet shop" 3
+"130" 111089 "Vendor in agro-vet shop" 2
+"131" 111090 "Vendor in agro-vet shop" 2
+"132" 111091 "Vendor in agro-vet shop" 5
+"133" 111092 "Vendor in agro-vet shop" 4
+"134" 111100 "Vendor in agro-vet shop" 2
+"135" 111101 "Vendor in agro-vet shop" 2
+"136" 111064 "Teacher" 2
+"137" 111086 "Teacher" 2
+"138" 111004 "Extension agent" 2
+"139" 111007 "Extension agent" 3
+"140" 111017 "Extension agent" 3
+"141" 111018 "Extension agent" 2
+"142" 111024 "Extension agent" 2
+"143" 111029 "Extension agent" 2
+"144" 111031 "Extension agent" 4
+"145" 111032 "Extension agent" 2
+"146" 111035 "Extension agent" 1
+"147" 111047 "Extension agent" 2
+"148" 111048 "Extension agent" 2
+"149" 111054 "Extension agent" 2
+"150" 111055 "Extension agent" 2
+"151" 111056 "Extension agent" 2
+"152" 111060 "Extension agent" 2
+"153" 111064 "Extension agent" 2
+"154" 111066 "Extension agent" 2
+"155" 111067 "Extension agent" 1
+"156" 111068 "Extension agent" 2
+"157" 111070 "Extension agent" 1
+"158" 111071 "Extension agent" 2
+"159" 111072 "Extension agent" 2
+"160" 111077 "Extension agent" 4
+"161" 111078 "Extension agent" 1
+"162" 111079 "Extension agent" 2
+"163" 111080 "Extension agent" 3
+"164" 111081 "Extension agent" 2
+"165" 111082 "Extension agent" 2
+"166" 111084 "Extension agent" 2
+"167" 111086 "Extension agent" 1
+"168" 111087 "Extension agent" 2
+"169" 111089 "Extension agent" 3
+"170" 111092 "Extension agent" 3
+"171" 111095 "Extension agent" 1
+"172" 111097 "Extension agent" 3
+"173" 111098 "Extension agent" 2
+"174" 111100 "Extension agent" 2
+"175" 111005 "NGO agent" 3
+"176" 111014 "NGO agent" 3
+"177" 111016 "NGO agent" 4
+"178" 111017 "NGO agent" 3
+"179" 111018 "NGO agent" 3
+"180" 111019 "NGO agent" 5
+"181" 111024 "NGO agent" 2
+"182" 111031 "NGO agent" 5
+"183" 111032 "NGO agent" 2
+"184" 111036 "NGO agent" 3
+"185" 111038 "NGO agent" 2
+"186" 111060 "NGO agent" 2
+"187" 111070 "NGO agent" 2
+"188" 111071 "NGO agent" 2
+"189" 111077 "NGO agent" 2
+"190" 111078 "NGO agent" 2
+"191" 111080 "NGO agent" 2
+"192" 111081 "NGO agent" 1
+"193" 111082 "NGO agent" 2
+"194" 111091 "NGO agent" 2
+"195" 111007 "Vet service provider" 2
+"196" 111008 "Vet service provider" 4
+"197" 111011 "Vet service provider" 3
+"198" 111013 "Vet service provider" 3
+"199" 111014 "Vet service provider" 3
+"200" 111015 "Vet service provider" 4
+"201" 111017 "Vet service provider" 5
+"202" 111031 "Vet service provider" 3
+"203" 111037 "Vet service provider" 1
+"204" 111038 "Vet service provider" 3
+"205" 111039 "Vet service provider" 1
+"206" 111042 "Vet service provider" 1
+"207" 111043 "Vet service provider" 3
+"208" 111044 "Vet service provider" 1
+"209" 111046 "Vet service provider" 1
+"210" 111047 "Vet service provider" 1
+"211" 111048 "Vet service provider" 1
+"212" 111049 "Vet service provider" 4
+"213" 111050 "Vet service provider" 3
+"214" 111051 "Vet service provider" 3
+"215" 111053 "Vet service provider" 2
+"216" 111056 "Vet service provider" 2
+"217" 111057 "Vet service provider" 2
+"218" 111063 "Vet service provider" 2
+"219" 111066 "Vet service provider" 2
+"220" 111067 "Vet service provider" 3
+"221" 111068 "Vet service provider" 3
+"222" 111069 "Vet service provider" 3
+"223" 111070 "Vet service provider" 3
+"224" 111071 "Vet service provider" 3
+"225" 111072 "Vet service provider" 3
+"226" 111074 "Vet service provider" 3
+"227" 111081 "Vet service provider" 3
+"228" 111084 "Vet service provider" 3
+"229" 111086 "Vet service provider" 2
+"230" 111088 "Vet service provider" 3
+"231" 111090 "Vet service provider" 3
+"232" 111093 "Vet service provider" 3
+"233" 111074 "Gvt parastatal" 5
+"234" 111031 "Ag researcher" 1
+"235" 111013 "Microfinance rep" 2
+"236" 111031 "Microfinance rep" 1
+"237" 111067 "Microfinance rep" 2
+"238" 111072 "Microfinance rep" 2
+"239" 111007 "Farmer org. leader" 4
+"240" 111014 "Farmer org. leader" 5
+"241" 111015 "Farmer org. leader" 5
+"242" 111017 "Farmer org. leader" 5
+"243" 111018 "Farmer org. leader" 5
+"244" 111032 "Farmer org. leader" 5
+"245" 111046 "Farmer org. leader" 2
+"246" 111068 "Farmer org. leader" 2
+"247" 111070 "Farmer org. leader" 3
+"248" 111071 "Farmer org. leader" 2
+"249" 111081 "Farmer org. leader" 2
+"250" 111083 "Farmer org. leader" 1
+"251" 111008 "Women's org. leader" 5
+"252" 111011 "Women's org. leader" 5
+"253" 111013 "Women's org. leader" 5
+"254" 111015 "Women's org. leader" 5
+"255" 111016 "Women's org. leader" 5
+"256" 111027 "Women's org. leader" 1
+"257" 111031 "Women's org. leader" 3
+"258" 111053 "Women's org. leader" 5
+"259" 111054 "Women's org. leader" 5
+"260" 111055 "Women's org. leader" 5
+"261" 111061 "Women's org. leader" 5
+"262" 111064 "Women's org. leader" 5
+"263" 111086 "Women's org. leader" 5
+"264" 111014 "Youth org. leader" 4
+"265" 111077 "Youth org. leader" 1
+"266" 111053 "Local politican" 2
+"267" 111058 "Local politican" 2
+"268" 111063 "Local politican" 2

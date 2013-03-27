@@ -1,0 +1,268 @@
+"id" "var" "value"
+"1" "Chief" "Farmers" 5
+"2" "Farmers" "Farmers" 5
+"3" "Neighbor/friend" "Farmers" 5
+"4" "Weekly market vendor" "Farmers" 5
+"5" "Urban vendor" "Farmers" 5
+"6" "Vendor in agro-vet shop" "Farmers" 5
+"7" "Teacher" "Farmers" 3
+"8" "Religious leader" "Farmers" 5
+"9" "Extension agent" "Farmers" 4
+"10" "NGO agent" "Farmers" 2
+"11" "Vet service provider" "Farmers" 4
+"12" "Gvt parastatal" "Farmers" 5
+"13" "Ag researcher" "Farmers" 2
+"14" "Microfinance rep" "Farmers" 4
+"15" "Tractor owner" "Farmers" 5
+"16" "Farmer org. leader" "Farmers" 5
+"17" "Women's org. leader" "Farmers" 5
+"18" "Youth org. leader" "Farmers" 5
+"19" "Local politican" "Farmers" 5
+"20" "Chief" "Neighbor/friend" 4
+"21" "Farmers" "Neighbor/friend" 5
+"22" "Neighbor/friend" "Neighbor/friend" 5
+"23" "Weekly market vendor" "Neighbor/friend" 5
+"24" "Urban vendor" "Neighbor/friend" 5
+"25" "Vendor in agro-vet shop" "Neighbor/friend" 2
+"26" "Teacher" "Neighbor/friend" 3
+"27" "Religious leader" "Neighbor/friend" 5
+"28" "Extension agent" "Neighbor/friend" 5
+"29" "NGO agent" "Neighbor/friend" 5
+"30" "Vet service provider" "Neighbor/friend" 4
+"31" "Microfinance rep" "Neighbor/friend" 5
+"32" "Local politican" "Neighbor/friend" 2
+"33" "0" "0" 0
+"34" "Farmers" "Weekly market vendor" 5
+"35" "Neighbor/friend" "Weekly market vendor" 5
+"36" "Weekly market vendor" "Weekly market vendor" 5
+"37" "Urban vendor" "Weekly market vendor" 4
+"38" "Vendor in agro-vet shop" "Weekly market vendor" 3
+"39" "Teacher" "Weekly market vendor" 4
+"40" "Religious leader" "Weekly market vendor" 5
+"41" "Extension agent" "Weekly market vendor" 5
+"42" "NGO agent" "Weekly market vendor" 2
+"43" "Gvt parastatal" "Weekly market vendor" 5
+"44" "Microfinance rep" "Weekly market vendor" 5
+"45" "Farmer org. leader" "Weekly market vendor" 5
+"46" "Women's org. leader" "Weekly market vendor" 5
+"47" "Chief" "Urban vendor" 3
+"48" "Weekly market vendor" "Urban vendor" 5
+"49" "Urban vendor" "Urban vendor" 5
+"50" "Teacher" "Urban vendor" 5
+"51" "Religious leader" "Urban vendor" 5
+"52" "Extension agent" "Urban vendor" 5
+"53" "Ag researcher" "Urban vendor" 3
+"54" "Tractor owner" "Urban vendor" 2
+"55" "Farmer org. leader" "Urban vendor" 5
+"56" "Women's org. leader" "Urban vendor" 5
+"57" "Local politican" "Urban vendor" 5
+"58" "Chief" "Vendor in agro-vet shop" 3
+"59" "Farmers" "Vendor in agro-vet shop" 5
+"60" "Neighbor/friend" "Vendor in agro-vet shop" 3
+"61" "Weekly market vendor" "Vendor in agro-vet shop" 3
+"62" "Urban vendor" "Vendor in agro-vet shop" 5
+"63" "Vendor in agro-vet shop" "Vendor in agro-vet shop" 4
+"64" "Teacher" "Vendor in agro-vet shop" 4
+"65" "Religious leader" "Vendor in agro-vet shop" 3
+"66" "Extension agent" "Vendor in agro-vet shop" 4
+"67" "NGO agent" "Vendor in agro-vet shop" 3
+"68" "Vet service provider" "Vendor in agro-vet shop" 4
+"69" "Gvt parastatal" "Vendor in agro-vet shop" 5
+"70" "Microfinance rep" "Vendor in agro-vet shop" 2
+"71" "Tractor owner" "Vendor in agro-vet shop" 2
+"72" "Farmer org. leader" "Vendor in agro-vet shop" 5
+"73" "Women's org. leader" "Vendor in agro-vet shop" 5
+"74" "Local politican" "Vendor in agro-vet shop" 2
+"75" "Chief" "Teacher" 5
+"76" "Farmers" "Teacher" 3
+"77" "Neighbor/friend" "Teacher" 4
+"78" "Weekly market vendor" "Teacher" 4
+"79" "Urban vendor" "Teacher" 4
+"80" "Vendor in agro-vet shop" "Teacher" 3
+"81" "Teacher" "Teacher" 3
+"82" "Religious leader" "Teacher" 5
+"83" "Extension agent" "Teacher" 3
+"84" "NGO agent" "Teacher" 2
+"85" "Vet service provider" "Teacher" 4
+"86" "Gvt parastatal" "Teacher" 4
+"87" "Ag researcher" "Teacher" 2
+"88" "Microfinance rep" "Teacher" 5
+"89" "Farmer org. leader" "Teacher" 4
+"90" "Youth org. leader" "Teacher" 5
+"91" "Chief" "Religious leader" 5
+"92" "Farmers" "Religious leader" 3
+"93" "Neighbor/friend" "Religious leader" 5
+"94" "Weekly market vendor" "Religious leader" 5
+"95" "Vendor in agro-vet shop" "Religious leader" 4
+"96" "Teacher" "Religious leader" 4
+"97" "Religious leader" "Religious leader" 5
+"98" "Extension agent" "Religious leader" 5
+"99" "NGO agent" "Religious leader" 5
+"100" "Vet service provider" "Religious leader" 4
+"101" "Gvt parastatal" "Religious leader" 4
+"102" "Ag researcher" "Religious leader" 2
+"103" "Farmer org. leader" "Religious leader" 4
+"104" "Women's org. leader" "Religious leader" 5
+"105" "Youth org. leader" "Religious leader" 5
+"106" "Farmers" "Extension agent" 4
+"107" "Neighbor/friend" "Extension agent" 4
+"108" "Weekly market vendor" "Extension agent" 5
+"109" "Urban vendor" "Extension agent" 4
+"110" "Vendor in agro-vet shop" "Extension agent" 5
+"111" "Teacher" "Extension agent" 4
+"112" "Religious leader" "Extension agent" 5
+"113" "Extension agent" "Extension agent" 4
+"114" "NGO agent" "Extension agent" 2
+"115" "Vet service provider" "Extension agent" 4
+"116" "Gvt parastatal" "Extension agent" 3
+"117" "Ag researcher" "Extension agent" 2
+"118" "Microfinance rep" "Extension agent" 5
+"119" "Tractor owner" "Extension agent" 2
+"120" "Farmer org. leader" "Extension agent" 5
+"121" "Women's org. leader" "Extension agent" 5
+"122" "Youth org. leader" "Extension agent" 5
+"123" "Chief" "NGO agent" 3
+"124" "Farmers" "NGO agent" 4
+"125" "Vendor in agro-vet shop" "NGO agent" 5
+"126" "Religious leader" "NGO agent" 3
+"127" "Extension agent" "NGO agent" 2
+"128" "NGO agent" "NGO agent" 2
+"129" "Vet service provider" "NGO agent" 3
+"130" "Gvt parastatal" "NGO agent" 5
+"131" "Ag researcher" "NGO agent" 2
+"132" "Microfinance rep" "NGO agent" 3
+"133" "Farmer org. leader" "NGO agent" 5
+"134" "Women's org. leader" "NGO agent" 5
+"135" "Chief" "Vet service provider" 3
+"136" "Farmers" "Vet service provider" 3
+"137" "Neighbor/friend" "Vet service provider" 5
+"138" "Weekly market vendor" "Vet service provider" 5
+"139" "Urban vendor" "Vet service provider" 3
+"140" "Vendor in agro-vet shop" "Vet service provider" 5
+"141" "Teacher" "Vet service provider" 3
+"142" "Religious leader" "Vet service provider" 5
+"143" "Extension agent" "Vet service provider" 3
+"144" "NGO agent" "Vet service provider" 2
+"145" "Vet service provider" "Vet service provider" 4
+"146" "Gvt parastatal" "Vet service provider" 5
+"147" "Ag researcher" "Vet service provider" 5
+"148" "Microfinance rep" "Vet service provider" 2
+"149" "Tractor owner" "Vet service provider" 2
+"150" "Farmer org. leader" "Vet service provider" 5
+"151" "Women's org. leader" "Vet service provider" 5
+"152" "Local politican" "Vet service provider" 3
+"153" "Weekly market vendor" "Gvt parastatal" 3
+"154" "Urban vendor" "Gvt parastatal" 2
+"155" "Vendor in agro-vet shop" "Gvt parastatal" 5
+"156" "Extension agent" "Gvt parastatal" 3
+"157" "Vet service provider" "Gvt parastatal" 3
+"158" "Gvt parastatal" "Gvt parastatal" 1
+"159" "Ag researcher" "Gvt parastatal" 2
+"160" "Microfinance rep" "Gvt parastatal" 2
+"161" "Tractor owner" "Gvt parastatal" 2
+"162" "Farmer org. leader" "Gvt parastatal" 5
+"163" "Women's org. leader" "Gvt parastatal" 5
+"164" "Youth org. leader" "Gvt parastatal" 2
+"165" "Chief" "Ag researcher" 4
+"166" "Farmers" "Ag researcher" 3
+"167" "Neighbor/friend" "Ag researcher" 4
+"168" "Weekly market vendor" "Ag researcher" 2
+"169" "Urban vendor" "Ag researcher" 2
+"170" "Vendor in agro-vet shop" "Ag researcher" 3
+"171" "Teacher" "Ag researcher" 2
+"172" "Religious leader" "Ag researcher" 5
+"173" "Extension agent" "Ag researcher" 3
+"174" "NGO agent" "Ag researcher" 2
+"175" "Vet service provider" "Ag researcher" 2
+"176" "Gvt parastatal" "Ag researcher" 2
+"177" "Ag researcher" "Ag researcher" 3
+"178" "Microfinance rep" "Ag researcher" 2
+"179" "Farmer org. leader" "Ag researcher" 4
+"180" "Women's org. leader" "Ag researcher" 3
+"181" "Local politican" "Ag researcher" 3
+"182" "Chief" "Microfinance rep" 3
+"183" "Weekly market vendor" "Microfinance rep" 3
+"184" "Urban vendor" "Microfinance rep" 5
+"185" "Vendor in agro-vet shop" "Microfinance rep" 3
+"186" "Teacher" "Microfinance rep" 3
+"187" "Religious leader" "Microfinance rep" 4
+"188" "Extension agent" "Microfinance rep" 1
+"189" "Vet service provider" "Microfinance rep" 2
+"190" "Gvt parastatal" "Microfinance rep" 3
+"191" "Microfinance rep" "Microfinance rep" 1
+"192" "Tractor owner" "Microfinance rep" 4
+"193" "Farmer org. leader" "Microfinance rep" 3
+"194" "Women's org. leader" "Microfinance rep" 5
+"195" "Chief" "Tractor owner" 2
+"196" "Farmers" "Tractor owner" 2
+"197" "Neighbor/friend" "Tractor owner" 5
+"198" "Weekly market vendor" "Tractor owner" 2
+"199" "Urban vendor" "Tractor owner" 4
+"200" "Vendor in agro-vet shop" "Tractor owner" 2
+"201" "Teacher" "Tractor owner" 2
+"202" "Religious leader" "Tractor owner" 2
+"203" "Extension agent" "Tractor owner" 2
+"204" "Vet service provider" "Tractor owner" 2
+"205" "Ag researcher" "Tractor owner" 2
+"206" "Microfinance rep" "Tractor owner" 2
+"207" "Farmer org. leader" "Tractor owner" 2
+"208" "Women's org. leader" "Tractor owner" 2
+"209" "Local politican" "Tractor owner" 5
+"210" "Chief" "Farmer org. leader" 2
+"211" "Farmers" "Farmer org. leader" 4
+"212" "Weekly market vendor" "Farmer org. leader" 3
+"213" "Urban vendor" "Farmer org. leader" 4
+"214" "Vendor in agro-vet shop" "Farmer org. leader" 2
+"215" "Teacher" "Farmer org. leader" 3
+"216" "Religious leader" "Farmer org. leader" 4
+"217" "Extension agent" "Farmer org. leader" 4
+"218" "NGO agent" "Farmer org. leader" 2
+"219" "Vet service provider" "Farmer org. leader" 3
+"220" "Gvt parastatal" "Farmer org. leader" 5
+"221" "Ag researcher" "Farmer org. leader" 2
+"222" "Microfinance rep" "Farmer org. leader" 5
+"223" "Tractor owner" "Farmer org. leader" 2
+"224" "Farmer org. leader" "Farmer org. leader" 5
+"225" "Women's org. leader" "Farmer org. leader" 5
+"226" "Youth org. leader" "Farmer org. leader" 5
+"227" "Local politican" "Farmer org. leader" 5
+"228" "Chief" "Women's org. leader" 4
+"229" "Farmers" "Women's org. leader" 3
+"230" "Neighbor/friend" "Women's org. leader" 4
+"231" "Vendor in agro-vet shop" "Women's org. leader" 1
+"232" "Religious leader" "Women's org. leader" 3
+"233" "Extension agent" "Women's org. leader" 3
+"234" "NGO agent" "Women's org. leader" 3
+"235" "Vet service provider" "Women's org. leader" 3
+"236" "Gvt parastatal" "Women's org. leader" 5
+"237" "Ag researcher" "Women's org. leader" 1
+"238" "Microfinance rep" "Women's org. leader" 2
+"239" "Farmer org. leader" "Women's org. leader" 5
+"240" "Women's org. leader" "Women's org. leader" 5
+"241" "Youth org. leader" "Women's org. leader" 5
+"242" "Farmers" "Youth org. leader" 4
+"243" "Neighbor/friend" "Youth org. leader" 4
+"244" "Vendor in agro-vet shop" "Youth org. leader" 3
+"245" "Teacher" "Youth org. leader" 3
+"246" "Religious leader" "Youth org. leader" 2
+"247" "Extension agent" "Youth org. leader" 2
+"248" "NGO agent" "Youth org. leader" 5
+"249" "Vet service provider" "Youth org. leader" 3
+"250" "Gvt parastatal" "Youth org. leader" 4
+"251" "Ag researcher" "Youth org. leader" 2
+"252" "Microfinance rep" "Youth org. leader" 2
+"253" "Farmer org. leader" "Youth org. leader" 5
+"254" "Youth org. leader" "Youth org. leader" 5
+"255" "Farmers" "Local politican" 2
+"256" "Neighbor/friend" "Local politican" 2
+"257" "Weekly market vendor" "Local politican" 3
+"258" "Urban vendor" "Local politican" 3
+"259" "Vendor in agro-vet shop" "Local politican" 1
+"260" "Teacher" "Local politican" 2
+"261" "Religious leader" "Local politican" 4
+"262" "NGO agent" "Local politican" 2
+"263" "Vet service provider" "Local politican" 3
+"264" "Gvt parastatal" "Local politican" 2
+"265" "Microfinance rep" "Local politican" 2
+"266" "Tractor owner" "Local politican" 2
+"267" "Farmer org. leader" "Local politican" 4
