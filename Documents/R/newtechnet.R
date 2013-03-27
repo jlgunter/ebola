@@ -414,7 +414,7 @@ write.table(E11_weighted, "~/Documents/E11.csv")
 
 ##read in new farmer to farmer pairs created from python script
 
-E11_newpairs_tmp = read.csv('/home/ndssl/Documents/py/newpairsE11.csv', header=T)
+E11_newpairs_tmp = read.csv('/home/ndssl/Documents/csv_files_R/newpairsE11.csv', header=T)
 E11_newpairs = data.frame(E11_newpairs_tmp$id, E11_newpairs_tmp$var, E11_newpairs_tmp$value)
 
 names(E11_newpairs)[1] <- "id"
@@ -561,7 +561,7 @@ write.table(E12_weighted, "~/Documents/E12.csv")
 
 ##read in new farmer to farmer pairs created from python script
 
-E12_newpairs_tmp = read.csv('/home/ndssl/newpairsE12.csv', header=T)
+E12_newpairs_tmp = read.csv('/home/ndssl/Documents/csv_files_R/newpairsE12.csv', header=T)
 E12_newpairs = data.frame(E12_newpairs_tmp$id, E12_newpairs_tmp$var, E12_newpairs_tmp$value)
 
 names(E12_newpairs)[1] <- "id"
@@ -709,7 +709,7 @@ write.table(E13_weighted, "~/Documents/E13.csv")
 
 ##read in new farmer to farmer pairs created from python script
 
-E13_newpairs_tmp = read.csv('/home/ndssl/newpairsE13.csv', header=T)
+E13_newpairs_tmp = read.csv('/home/ndssl/Documents/csv_files_R/newpairsE13.csv', header=T)
 E13_newpairs = data.frame(E13_newpairs_tmp$id, E13_newpairs_tmp$var, E13_newpairs_tmp$value)
 
 names(E13_newpairs)[1] <- "id"
@@ -857,7 +857,7 @@ write.table(E23_weighted, "~/Documents/E23.csv")
 
 ##read in new farmer to farmer pairs created from python script
 
-E23_newpairs_tmp = read.csv('/home/ndssl/newpairsE23.csv', header=T)
+E23_newpairs_tmp = read.csv('/home/ndssl/Documents/csv_files_R/newpairsE23.csv', header=T)
 E23_newpairs = data.frame(E23_newpairs_tmp$id, E23_newpairs_tmp$var, E23_newpairs_tmp$value)
 
 names(E23_newpairs)[1] <- "id"
