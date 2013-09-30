@@ -1,3 +1,4 @@
+
 # install.packages("Hmisc")
 library(Hmisc)
 library(reshape)
@@ -285,9 +286,15 @@ library(reshape)
 
 ##site 11 (Tororo)
 
-questionE = data.frame(Combined[c(grep("Hh_23e_*", colnames(Combined)))], whole_data$hhrn, whole_data$Site) #create data frame with question e variables and identifying variables
+
+gender = data.frame(Combined[c(grep("Hh_23g_*", colnames(Combined)))], whole_data$hhrn, whole_data$agnttype, whole_data$Site) #create data frame with question e variables and identifying variables
+gender_melted11 = gender[gender$whole_data.Site == 11,]
+gender_melted11 = melt.data.frame(gender_melted11, id.vars=c('whole_data.hhrn', 'whole_data.agnttype', 'whole_data.Site'))
+gender_melted11_tmp = gender_melted11[gender_melted11$value != "N/a",]
+
+questionE = data.frame(Combined[c(grep("Hh_23e_*", colnames(Combined)))], whole_data$hhrn, whole_data$agnttype, whole_data$Site) #create data frame with question e variables and identifying variables
 E_melted11 = questionE[questionE$whole_data.Site == 11,]
-E_melted11 = melt.data.frame(E_melted11, id.vars=c('whole_data.hhrn', 'whole_data.Site'))
+E_melted11 = melt.data.frame(E_melted11, id.vars=c('whole_data.hhrn', 'whole_data.agnttype', 'whole_data.Site'))
 
 ##eliminate responses of "Never"
 E11_tmp = E_melted11[E_melted11$value != "Never",]
@@ -306,8 +313,8 @@ names(E11)[2]<-"Site"
 #selects all edges from g graph (3rd column of E_melted11)
 #need to weight these values, weakly being the most heavily weighted and yearly being the least heavily weighted
 
-E11.value<-rep(E11[,4])  #E11.value is what will be used to assign numerical values to the frequency values (Monthly, etc)
-E11.recode<-rep(0, 268)
+E11.value<-rep(E11[,5])  #E11.value is what will be used to assign numerical values to the frequency values (Monthly, etc)
+#E11.recode<-rep(0, 268)
 
 #assign numerical values (edge weights) to frequencies
 E11.recode[E11.value=="Yearly"]<-1
@@ -318,11 +325,11 @@ E11.recode[E11.value=="Weekly"]<-5
 
 #do the same for institutions##############################
 
-names(E11_inst)[1]<-"ID"
+names(E11_inst)[1]<-"id"
 names(E11_inst)[2]<-"Site"
 
-E11_inst.value<-rep(E11_inst[,4])
-E11_inst.recode<-rep(0, 206)
+E11_inst.value<-rep(E11_inst[,5])
+E11_inst.recode<-rep(0, 169)
 E11_inst.recode[E11_inst.value=="Yearly"]<-1
 E11_inst.recode[E11_inst.value=="Seasonally"]<-2
 E11_inst.recode[E11_inst.value=="Monthly"]<-3
@@ -330,8 +337,8 @@ E11_inst.recode[E11_inst.value=="Biweekly"]<-4
 E11_inst.recode[E11_inst.value=="Weekly"]<-5
 
 
-E11_inst.var<-rep(E11_inst[,3])
-E11_inst.contacts<-rep(0, 206)
+E11_inst.var<-rep(E11_inst[,4])
+E11_inst.contacts<-rep(0, 169)
 
 E11_inst.contacts[E11_inst.var=="Hh_23e_1"]<-"Chief"
 E11_inst.contacts[E11_inst.var=="Hh_23e_2"]<-"Farmers"
@@ -351,40 +358,41 @@ E11_inst.contacts[E11_inst.var=="Hh_23e_15"]<-"Tractor owner"
 E11_inst.contacts[E11_inst.var=="Hh_23e_16"]<-"Farmer org. leader"
 E11_inst.contacts[E11_inst.var=="Hh_23e_17"]<-"Women's org. leader"
 E11_inst.contacts[E11_inst.var=="Hh_23e_18"]<-"Youth org. leader"
-E11_inst.contacts[E11_inst.var=="Hh_23e_19"]<-"Local politican"
+E11_inst.contacts[E11_inst.var=="Hh_23e_19"]<-"Local politician"
 E11_inst.contacts[E11_inst.var=="Hh_23e_20"]<-"Other"
 
 ##change ID to word for gephi
 E11_inst.id<-rep(E11_inst[,1])
-E11_inst.idname<-rep(0, 206)
 
-E11_inst.idname[E11_inst.id=="11001"]<-"Chief"
-E11_inst.idname[E11_inst.id=="11002"]<-"Farmers"
-E11_inst.idname[E11_inst.id=="11003"]<-"Neighbor/friend"
-E11_inst.idname[E11_inst.id=="11004"]<-"Weekly market vendor"
-E11_inst.idname[E11_inst.id=="11005"]<-"Urban vendor"
-E11_inst.idname[E11_inst.id=="11006"]<-"Vendor in agro-vet shop"
-E11_inst.idname[E11_inst.id=="11007"]<-"Teacher"
-E11_inst.idname[E11_inst.id=="11008"]<-"Religious leader"
-E11_inst.idname[E11_inst.id=="11009"]<-"Extension agent"
-E11_inst.idname[E11_inst.id=="11010"]<-"NGO agent"
-E11_inst.idname[E11_inst.id=="11011"]<-"Vet service provider"
-E11_inst.idname[E11_inst.id=="11012"]<-"Gvt parastatal"
-E11_inst.idname[E11_inst.id=="11013"]<-"Ag researcher"
-E11_inst.idname[E11_inst.id=="11014"]<-"Microfinance rep"
-E11_inst.idname[E11_inst.id=="11015"]<-"Tractor owner"
-E11_inst.idname[E11_inst.id=="11016"]<-"Farmer org. leader"
-E11_inst.idname[E11_inst.id=="11017"]<-"Women's org. leader"
-E11_inst.idname[E11_inst.id=="11018"]<-"Youth org. leader"
-E11_inst.idname[E11_inst.id=="11019"]<-"Local politican"
-E11_inst.idname[E11_inst.id=="11020"]<-"Other"
+
+E11_inst.idname<-rep(0, 169)
+
+#this is new
+
+E11_inst.idname[E11_inst.id == "11001"] <- "Chief"
+E11_inst.idname[E11_inst.id == "11002"] <- "Urban vendor"
+E11_inst.idname[E11_inst.id == "11003"] <- "Vendor in agro-vet shop"
+E11_inst.idname[E11_inst.id == "11004"] <- "Weekly market vendor"
+E11_inst.idname[E11_inst.id == "11005"] <- "Religious leader"
+E11_inst.idname[E11_inst.id == "11006"] <- "Extension agent"
+E11_inst.idname[E11_inst.id == "11007"] <- "NGO agent"
+E11_inst.idname[E11_inst.id == "11008"] <- "NGO agent"
+E11_inst.idname[E11_inst.id == "11009"] <- "NGO agent"
+E11_inst.idname[E11_inst.id == "11010"] <- "Gvt parastatal"
+E11_inst.idname[E11_inst.id == "11011"] <- "Ag researcher"
+E11_inst.idname[E11_inst.id == "11012"] <- "Farmer org. leader"
+E11_inst.idname[E11_inst.id == "11013"] <- "Other"
+E11_inst.idname[E11_inst.id == "11014"] <- "Women's org. leader"
+E11_inst.idname[E11_inst.id == "11015"] <- "Local politician"
 
 E11_inst_weighted<-data.frame(id=E11_inst.idname,var=E11_inst.contacts,value=E11_inst.recode) # create a new dataframe that includes edge weights
 
-write.table(E11_inst_weighted, "~/Documents/E11_inst.csv")
+E11_inst_weighted_new<-E11_inst_weighted[as.character(E11_inst_weighted$id) != as.character(E11_inst_weighted$var),]
+
+write.table(E11_inst_weighted_new, "~/Documents/E11_inst.csv")
 ####
 
-E11.var<-rep(E11[,3])
+E11.var<-rep(E11[,4])
 E11.contacts<-rep(0, 268)
 
 E11.contacts[E11.var=="Hh_23e_1"]<-"Chief"
@@ -405,7 +413,7 @@ E11.contacts[E11.var=="Hh_23e_15"]<-"Tractor owner"
 E11.contacts[E11.var=="Hh_23e_16"]<-"Farmer org. leader"
 E11.contacts[E11.var=="Hh_23e_17"]<-"Women's org. leader"
 E11.contacts[E11.var=="Hh_23e_18"]<-"Youth org. leader"
-E11.contacts[E11.var=="Hh_23e_19"]<-"Local politican"
+E11.contacts[E11.var=="Hh_23e_19"]<-"Local politician"
 E11.contacts[E11.var=="Hh_23e_20"]<-"Other"
 
 E11_weighted<-data.frame(id=E11[,1],var=E11.contacts,value=E11.recode) # create a new dataframe that includes edge weights
@@ -421,13 +429,93 @@ names(E11_newpairs)[1] <- "id"
 names(E11_newpairs)[2] <- "var"
 names(E11_newpairs)[3] <- "value"
 
+
 #combine the institutions and the new pairs into one data frame to write out to gephi
-colnames(E11_inst_weighted) <- colnames(E11_newpairs)
-E11_whole <- rbind(E11_newpairs, E11_inst_weighted)
+#colnames(E11_inst_weighted) <- colnames(E11_newpairs)
+E11_whole <- rbind(E11_newpairs, E11_inst_weighted_new)
 
 g = graph.data.frame(E11_whole)
-write.graph(g, "site11.graphml", format= "graphml")
+write.graph(g, "E11_whole.graphml", format= "graphml")
 
+###################################################################################
+#gender preliminary analysis
+
+reg_indicators = read.csv('/home/ndssl/Desktop/regression_indicators.csv', header=T)
+#find a way to match column 1 and 9 with hhrn in whole_data
+
+#isolate site11 in regression indicators
+gender11_tmp = reg_indicators[reg_indicators$ID_number <= 111101,]
+
+#melt down to just unique id and wealth index
+gender11 = data.frame(gender11_tmp$ID_number, gender11_tmp$Gender_respondent)
+
+names(gender11)[1] <- "id"
+names(gender11)[2] <- "gender"
+
+female11 = data.frame(gender11[gender11$gender == 2,])
+male11 = data.frame(gender11[gender11$gender == 1,])
+
+new_female11 = merge(E11_weighted, female11, by.x = "id")
+new_male11 = merge(E11_weighted, male11, by.x = "id")
+
+write.table(new_female11, "~/Documents/new_female11.csv", row.names=FALSE)
+write.table(new_male11, "~/Documents/new_male11.csv", row.names=FALSE)
+
+#go back to python to generate new farmer to farmer contacts 
+
+new_female_pairs11_tmp = read.csv('/home/ndssl/Documents/csv_files_R/new_female_pairs11.csv', header=T)
+new_female_pairs11 = data.frame(new_female_pairs11_tmp$id, new_female_pairs11_tmp$var, new_female_pairs11_tmp$value)
+
+names(new_female_pairs11)[1] <- "id"
+names(new_female_pairs11)[2] <- "var"
+names(new_female_pairs11)[3] <- "value"
+
+female11_whole <- rbind(new_female_pairs11, E11_inst_weighted_new)
+g = graph.data.frame(female11_whole)
+write.graph(g, "female11_whole.graphml", format= "graphml")
+
+new_male_pairs11_tmp = read.csv('/home/ndssl/Documents/csv_files_R/new_male_pairs11.csv', header=T)
+new_male_pairs11 = data.frame(new_male_pairs11_tmp$id, new_male_pairs11_tmp$var, new_male_pairs11_tmp$value)
+
+names(new_male_pairs11)[1] <- "id"
+names(new_male_pairs11)[2] <- "var"
+names(new_male_pairs11)[3] <- "value"
+
+male11_whole <- rbind(new_male_pairs11, E11_inst_weighted_new)
+g = graph.data.frame(male11_whole)
+write.graph(g, "male11_whole.graphml", format= "graphml")
+
+###
+gender_whole11 = join(E11_whole, gender11, by="id", match = "all")
+
+g = graph.data.frame(gender_whole11)
+write.graph(g, "site11.sept.graphml", format= "graphml")
+write.table(gender_whole11, "~/Documents/gender_edges.csv")
+
+names(df_female)[1] <- "Source"
+names(df_female)[2] <- "Target"
+
+write.table(gender11, "~/Documents/gender11.csv")
+
+gender_whole11[is.na(gender_whole11)] = 0
+
+df_female11 = data.frame(gender_whole11[gender_whole11$gender != 1,])
+
+
+df_female11_gephi = data.frame(df_female11$Source, df_female11$Target)
+names(df_female11_gephi)[1] <- "Source"
+names(df_female11_gephi)[2] <- "Target"
+write.table(df_female11_gephi, "~/Documents/df_female11_gephi.csv", row.names=FALSE)
+
+write.table(df_female11, "~/Documents/df_female11.csv", row.names=FALSE)
+
+g = graph.data.frame(df_female11)
+write.graph(g, "female11.graphml", format= "graphml")
+
+df_male11 = data.frame(gender_whole11[gender_whole11$gender != 2,])
+write.graph(g, "male11.graphml", format= "graphml")
+
+##########################################################################33
 
 #site 12
 
@@ -591,7 +679,18 @@ E13_inst = E13_tmp[E13_tmp$whole_data.hhrn <= 13021,]
 ##eliminate institutions for now in variable that will become csv file to write into python notebook and later gephi
 E13 = E13_tmp[E13_tmp$whole_data.hhrn >= 210000,]
 
+##############
+#separating other questions
 
+questionD = data.frame(Combined[c(grep("Hh_23d_*", colnames(Combined)))], whole_data$hhrn, whole_data$Site) #create data frame with question e variables and identifying variables
+D_melted13 = questionD[questionD$whole_data.Site == 13,]
+D_melted13 = melt.data.frame(D_melted13, id.vars=c('whole_data.hhrn', 'whole_data.Site'))
+
+questionC = data.frame(Combined[c(grep("Hh_23c_*", colnames(Combined)))], whole_data$hhrn, whole_data$Site) #create data frame with question e variables and identifying variables
+C_melted13 = questionC[questionC$whole_data.Site == 13,]
+C_melted13 = melt.data.frame(C_melted13, id.vars=c('whole_data.hhrn', 'whole_data.Site'))
+
+D_melted13 = D_melted13[D_melted13$value != "0",]
 names(E13)[1]<-"ID"
 names(E13)[2]<-"Site"
 
@@ -871,233 +970,8 @@ E23_whole <- rbind(E23_newpairs, E23_inst_weighted)
 g = graph.data.frame(E23_whole)
 write.graph(g, "site23.graphml", format= "graphml")
 
+write.table(E23_whole, "~/Documents/csv_graph_files/site23graph.csv")
 #######################################################################
-
-##ideas for how to examine output from initial simulations (these simulations did not have the proper parameters set, used SI model)
-
-#data frame = site11
-#want columns 1, 2, 3, 5
-
-site11_run02_tmp = read.csv('/home/ndssl/Documents/run02/site11graph.out', header=T)
-library(reshape2)
-
-site11_run02_whole = colsplit(site11_run02_tmp[,1], " ", c("id", "iter", "tstep", "na", "state", "thresh"))
-site11_run02 = data.frame(site11_run02_whole$id, site11_run02_whole$iter, site11_run02_whole$tstep, site11_run02_whole$state)
-names(site11_run02)[1]<-'id'
-names(site11_run02)[2]<-'iter'
-names(site11_run02)[3]<-'tstep'
-names(site11_run02)[4]<-'state'
-
-susceptible = site11_run02[site11_run02$state==0,]
-
-y = which(site11_run02$state == 1) #y-axis
-#x-axis should be timestep
-
-library(epitools)
-
-#attach(site11_run02)
-x = tstep
-plot(x, state)
-points(x[iter==1], state[iter==1], col="blue")
-
-write.table(site11_run02,file="site11_run02.csv",sep=",",row.names=F)
-
-
-library(Epi)
-
-stat.table(tstep, data=site11_run02)
-#cross-tabulation
-stat.table(list(tstep, state), data=site11_run02)
-iterations <- transform(site11_run02,iters=cut(iter, breaks=c(0:50), right=FALSE))
-stat.table(agegrp,data=births)
-
-
-barplot(table(site11_run02$tstep, which(site11_run02$state == 1,)))
-
-library(epicalc)
-
-iter0 = site11_run02[iter=="0",]
-#attach(iter0)
-plot(iter0$tstep[state=="0"], iter0$Freq[state=="0"], xlab="Timestep", ylab="Infected nodes")
-
-x = data.frame(table(site11_run02$iter, site11_run02$state))
-names(x) <- c('iter', "state", "freq")
-x
-
-table = table(site11_run02$tstep, site11_run02$state)
-barplot(table, main="Infected nodes by timestep", xlab="timestep", ylab="Number of infected nodes", col=c("darkblue","red"), beside=TRUE)
-
-#want each iteration separately
-
-run02.iter0 = site11_run02[site11_run02$iter == 0,]
-run02.iter1 = site11_run02[site11_run02$iter == 1,]
-run02.iter2 = site11_run02[site11_run02$iter == 2,]
-run02.iter3 = site11_run02[site11_run02$iter == 3,]
-
-#melt to only include nodes in state 1
-
-inf.run02.0 = run02.iter0[run02.iter0$state != 0,]
-inf.run02.1 = run02.iter1[run02.iter1$state != 0,]
-inf.run02.2 = run02.iter2[run02.iter2$state != 0,]
-inf.run02.3 = run02.iter3[run02.iter3$state != 0,]
-
-#count the number of nodes that changed state at each timestep
-count(inf.run02.0$tstep == 30)
-
-#use that command to somehow make a graph of each timestep at each iteration?
-#if TRUE, plot or chart that number 
-
-table(inf.run02.0$tstep, inf.run02.0$state)
-test = table(inf.run02.0$tstep, inf.run02.0$state)
-
-test1 = survfit(Surv(run02.iter0$tstep, run02.iter0$state) ~1)
-test2 = survfit(Surv(run02.iter1$tstep, run02.iter1$state) ~1)
-test3 = survfit(Surv(run02.iter2$tstep, run02.iter2$state) ~1)
-test4 = survfit(Surv(run02.iter3$tstep, run02.iter3$state) ~1)
-
-
-plot(test1, main="Seed: NGO", xlab="timestep", ylab="survival function", col="red")
-lines(test2, col="blue")
-lines(test3, col="green")
-lines(test4, col="orange")
-
-#overall title
-title("Site 11, Run 02, iter 0:3: Kaplan-Meier estimate with 95% confidence bounds", outer=TRUE)
-
-#could do for whole iteration
-test5 = survfit(Surv(site11_run02$tstep, site11_run02$state) ~1)
-plot(test5)
-
-#import csvs from other sites, plot on same graph
-site11_run03_tmp = read.csv('/home/ndssl/Documents/run03/site11graph.out', header=T)
-
-site11_run03_whole = colsplit(site11_run03_tmp[,1], " ", c("id", "iter", "tstep", "na", "state", "thresh"))
-site11_run03 = data.frame(site11_run03_whole$id, site11_run03_whole$iter, site11_run03_whole$tstep, site11_run03_whole$state)
-names(site11_run03)[1]<-'id'
-names(site11_run03)[2]<-'iter'
-names(site11_run03)[3]<-'tstep'
-names(site11_run03)[4]<-'state'
-test_03 = survfit(Surv(site11_run03$tstep, site11_run03$state) ~1)
-plot(test_03)
-lines(test_03)
-
-which(site11_run03$state == 1)
-
-
-
-##########################################
-
-#epicurve.table(x=site11_run02$tstep, y=which(site11_run02$state == 1,), width = 1, space = 0, tick = TRUE, tick.offset = 0.5, segments = FALSE)
-
-library(epicalc)
-
-iter0 = site11[iter=="0",]
-attach(iter0)
-plot(tstep[state=="0"], Freq[state=="0"], xlab="Timestep", ylab="Infected nodes")
-
-x = data.frame(table(site11$iter, site11$state))
-names(x) <- c('iter', "state", "freq")
-x
-
-table = table(site11$tstep, site11$state)
-barplot(table, main="Infected nodes by timestep", xlab="timestep", ylab="Number of infected nodes", col=c("darkblue","red"), beside=TRUE)
-
-names(site11.run16) <- c("id", "iter", "tstep", "na", "state", "thresh")
-
-#want each iteration separately
-
-run16.iter0 = site11.run16[site11.run16$iter == 0,]
-run16.iter1 = site11.run16[site11.run16$iter == 1,]
-run16.iter2 = site11.run16[site11.run16$iter == 2,]
-run16.iter3 = site11.run16[site11.run16$iter == 3,]
-
-#melt to only include nodes in state 1
-
-inf.run16.0 = run16.iter0[run16.iter0$state != 0,]
-inf.run16.1 = run16.iter1[run16.iter1$state != 0,]
-inf.run16.2 = run16.iter2[run16.iter2$state != 0,]
-inf.run16.3 = run16.iter3[run16.iter3$state != 0,]
-
-#count the number of nodes that changed state at each timestep
-count(inf.run16.0$tstep == 30)
-
-#use that command to somehow make a graph of each timestep at each iteration?
-#if TRUE, plot or chart that number 
-
-table(inf.run16.0$tstep, inf.run16.0$state)
-test = table(inf.run16.0$tstep, inf.run16.0$state)
-
-test1 = survfit(Surv(run16.iter0$tstep, run16.iter0$state) ~1)
-test2 = survfit(Surv(run16.iter1$tstep, run16.iter1$state) ~1)
-test3 = survfit(Surv(run16.iter2$tstep, run16.iter2$state) ~1)
-test4 = survfit(Surv(run16.iter3$tstep, run16.iter3$state) ~1)
-par(mfrow=c(2,2),oma=c(0,0,2,0))
-
-plot(test1, main="Seed: Farmer org. leader", xlab="timestep", ylab="survival function")
-plot(test2, main="Seed: Urban vendor", xlab="timestep", ylab="survival function")
-plot(test3, main="Seed: Researcher", xlab="timestep", ylab="survival function")
-plot(test4, main="Seed: Agro-vendor", xlab="timestep", ylab="survival function")
-
-#overall title
-title("Site 11, Run 16: Kaplan-Meier estimate with 95% confidence bounds", outer=TRUE)
-
-#could do for whole iteration
-test5 = survfit(Surv(site11.run16$tstep, site11.run16$state) ~1)
-plot(test5)
-
-#run 18: threshold 3, 5 seed nodes
-
-names(run18) <- c("id", "iter", "tstep", "na", "state", "thresh")
-
-#want each iteration separately
-
-run18.iter0 = run18[run18$iter == 0,]
-run18.iter1 = run18[run18$iter == 1,]
-run18.iter2 = run18[run18$iter == 2,]
-
-run18.test0 = survfit(Surv(run18.iter0$tstep, run18.iter0$state) ~1)
-run18.test1 = survfit(Surv(run18.iter1$tstep, run18.iter1$state) ~1)
-run18.test2 = survfit(Surv(run18.iter2$tstep, run18.iter2$state) ~1)
-par(mfrow=c(2,2),oma=c(0,0,2,0))
-
-plot(run18.test0, main="Seed: Farmer org. leader", xlab="timestep", ylab="survival function")
-plot(run18.test1, main="Seed: Urban vendor", xlab="timestep", ylab="survival function")
-plot(run18.test2, main="Seed: Extension", xlab="timestep", ylab="survival function")
-
-#overall title
-title("Site 11, Run 18: Kaplan-Meier estimate with 95% confidence bounds", outer=TRUE)
-
-#run19
-
-names(run19) <- c("id", "iter", "tstep", "na", "state", "thresh")
-
-#want each iteration separately
-
-run19.iter0 = run19[run19$iter == 0,]
-run19.iter1 = run19[run19$iter == 1,]
-run19.iter2 = run19[run19$iter == 2,]
-
-run19.test0 = survfit(Surv(run19.iter0$tstep, run19.iter0$state) ~1)
-run19.test1 = survfit(Surv(run19.iter1$tstep, run19.iter1$state) ~1)
-run19.test2 = survfit(Surv(run19.iter2$tstep, run19.iter2$state) ~1)
-par(mfrow=c(2,2),oma=c(0,0,2,0))
-
-plot(run19.test0, main="Seed: Farmer org. leader", xlab="timestep", ylab="survival function")
-plot(run19.test1, main="Seed: Urban vendor", xlab="timestep", ylab="survival function")
-plot(run19.test2, main="Seed: NGO", xlab="timestep", ylab="survival function")
-
-#overall title
-title("Site 11, Run 19: Kaplan-Meier estimate with 95% confidence bounds", outer=TRUE)
-
-run18.whole = survfit(Surv(run18$tstep, run18$state) ~1)
-run19.whole = survfit(Surv(run19$tstep, run19$state) ~1)
-par(mfrow=c(2,1),oma=c(0,0,2,0))
-plot(run18.whole, main="Seeds: Farmer org., Urban vendor, Extension", xlab="timestep", ylab="survival function")
-plot(run19.whole, main="Seeds: Farmer org., Urban vendor, NGO", xlab="timestep", ylab="survival function")
-
-title("Site 11, Runs 18-19: Kaplan-Meier estimate with 95% confidence bounds", outer=TRUE)
-
-#################################################################################################
 
 ##look at farmer to farmer contact
 
@@ -1121,65 +995,6 @@ count(neighbor11$Hh_23e_3 == 5)
 farmertofarmer11 <- matrix(c(76, 12, 2, 3, 13, 2, 60, 17, 9, 6, 12, 4),ncol=6,byrow=TRUE)
 rownames(farmertofarmer11) <- c("Other farmers", "Neighbors/Friends")
 colnames(farmertofarmer11) <- c("Never", "Weekly", "Biweekly", "Monthly", "Seasonally", "Yearly")
-
-
-count(farmer12$Hh_23e_2 == 0)
-count(farmer12$Hh_23e_2 == 1)
-count(farmer12$Hh_23e_2 == 2)
-count(farmer12$Hh_23e_2 == 3)
-count(farmer12$Hh_23e_2 == 4)
-count(farmer12$Hh_23e_2 == 5)
-
-count(neighbor12$Hh_23e_3 == 0)
-count(neighbor12$Hh_23e_3 == 1)
-count(neighbor12$Hh_23e_3 == 2)
-count(neighbor12$Hh_23e_3 == 3)
-count(neighbor12$Hh_23e_3 == 4)
-count(neighbor12$Hh_23e_3 == 5)
-
-farmertofarmer12 <- matrix(c(18, 69, 7, 5, 17, 1, 42, 45, 4, 2, 24, 0),ncol=6,byrow=TRUE)
-rownames(farmertofarmer12) <- c("Other farmers", "Neighbors/Friends")
-colnames(farmertofarmer12) <- c("Never", "Weekly", "Biweekly", "Monthly", "Seasonally", "Yearly")
-
-count(farmer13$Hh_23e_2 == 0)
-count(farmer13$Hh_23e_2 == 1)
-count(farmer13$Hh_23e_2 == 2)
-count(farmer13$Hh_23e_2 == 3)
-count(farmer13$Hh_23e_2 == 4)
-count(farmer13$Hh_23e_2 == 5)
-
-count(neighbor13$Hh_23e_3 == 0)
-count(neighbor13$Hh_23e_3 == 1)
-count(neighbor13$Hh_23e_3 == 2)
-count(neighbor13$Hh_23e_3 == 3)
-count(neighbor13$Hh_23e_3 == 4)
-count(neighbor13$Hh_23e_3 == 5)
-
-farmertofarmer13 <- matrix(c(34, 39, 6, 6, 18, 1, 56, 29, 5, 3, 10, 0),ncol=6,byrow=TRUE)
-rownames(farmertofarmer13) <- c("Other farmers", "Neighbors/Friends")
-colnames(farmertofarmer13) <- c("Never", "Weekly", "Biweekly", "Monthly", "Seasonally", "Yearly")
-
-count(farmer23$Hh_23e_2 == 0)
-count(farmer23$Hh_23e_2 == 1)
-count(farmer23$Hh_23e_2 == 2)
-count(farmer23$Hh_23e_2 == 3)
-count(farmer23$Hh_23e_2 == 4)
-count(farmer23$Hh_23e_2 == 5)
-
-count(neighbor23$Hh_23e_3 == 0)
-count(neighbor23$Hh_23e_3 == 1)
-count(neighbor23$Hh_23e_3 == 2)
-count(neighbor23$Hh_23e_3 == 3)
-count(neighbor23$Hh_23e_3 == 4)
-count(neighbor23$Hh_23e_3 == 5)
-
-farmertofarmer23 <- matrix(c(42, 35, 5, 6, 17, 0, 47, 25, 7, 6, 19, 1),ncol=6,byrow=TRUE)
-rownames(farmertofarmer23) <- c("Other farmers", "Neighbors/Friends")
-colnames(farmertofarmer23) <- c("Never", "Weekly", "Biweekly", "Monthly", "Seasonally", "Yearly")
-
-#this doesn't work, need to fix
-#barplot(as.matrix(farmertofarmer11), main="Contact between farmers", ylab= "Frequency of contact", beside=TRUE, col=rainbow(5))
-
 
 #####################################################################################
 
@@ -1298,45 +1113,9 @@ glm.fit <- fitted(glm.out)
 #curve(predict(glm.fit,data.frame(Tillrecode11=x),type="resp"),add=TRUE)
 
 ##############################################################################
-#try running the regression using all of the variables - use reg_ind11 instead of Till_var11
 
-names(reg_ind11)[1] <- "ID"
-Till_var11_big = merge(Tillbeliefs11,reg_ind11, by="ID")
-
-
-Till_var11_big$wealth_index <- factor(Till_var11_big$wealth_index)
-
-glm.out_whole <- glm(Tillrecode11 ~ wealth_index + female_household_Head + Percent_energy_from_staples + Gender_respondent + Age_respondent + Educ_respondent + Importance_offarm_income + animal_traction + tractor + area_farmed + modern_cap_int_farming + mixed_farming + poor_health + access_to_credit, data=Till_var11_big, family=binomial(link="logit"))
-glm.fit <- fitted(glm.out_whole)
-
-dbinom(5, size=88, prob=.4)
-
-
-####################################################################################
-#multinomial distribution
-
-library(MASS)
-
-belief.table11 = (table(Tillage11$beliefs))/88
-#divide each of the values in the total by the sum of all responses
-
-belief.prob11 = c(0.07954545, 0.25000000, 0.27272727, 0.29545455, 0.10227273)
-chisq.test(belief.table11, p=belief.prob11) 
-
-
-#####################################################################################
 
 #generate random numbers to use as seed nodes in simulations
 
 #site11_random
 sample(0:88, 3, replace=F)
-
-#site12_random 
-sample(0:93, 3, replace=F)
-
-#site13_random
-sample(0:79, 3, replace=F)
-
-#site23_random
-sample(0:79, 3, replace=F)
-sample(0:93, 3, replace=F)
